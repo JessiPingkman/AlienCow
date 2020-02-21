@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
+    public static ObjectPoolManager Instance;
+
     [Serializable]
     public class PoolModel
     {
@@ -15,7 +17,23 @@ public class ObjectPoolManager : MonoBehaviour
 
     public List<PoolModel> poolModels;
 
-    public static Dictionary<PoolTags, Queue<GameObject>> PoolsDictionary;
+    private Dictionary<PoolTags, Queue<GameObject>> PoolsDictionary;
+
+
+
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        
+        InitializePoolsDictionary(PoolsDictionary);
+    }
 
     private void InitializePoolsDictionary(Dictionary<PoolTags, Queue<GameObject>> InitializableDictionary)
     {
@@ -32,17 +50,15 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    public GameObject getFromPool(PoolTags tag){
+    public GameObject GetFromPool(PoolTags tag)
+    {
         if(PoolsDictionary[tag] == null) throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         return PoolsDictionary[tag].Dequeue();
     }
 
-    public void ReturnToPool(PoolTags tag, GameObject obj){
-        PoolsDictionary[tag].Enqueue(obj);
-    }
-
-    void Awake()
+    public void ReturnToPool(PoolTags tag, GameObject obj)
     {
-        InitializePoolsDictionary(PoolsDictionary);
+        if(PoolsDictionary[tag] == null) throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        PoolsDictionary[tag].Enqueue(obj);
     }
 }
