@@ -31,7 +31,7 @@ public class ObjectPoolManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         InitializePoolsDictionary(PoolsDictionary);
     }
 
@@ -52,13 +52,21 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetFromPool(PoolTags tag)
     {
-        if(PoolsDictionary[tag] == null) throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        if(PoolsDictionary[tag] == null)
+        {
+            throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        }
+        
         return PoolsDictionary[tag].Dequeue();
     }
 
     public void ReturnToPool(PoolTags tag, GameObject obj)
     {
-        if(PoolsDictionary[tag] == null) throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        if(PoolsDictionary[tag] == null)
+        {
+            throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        }
+
         PoolsDictionary[tag].Enqueue(obj);
     }
 }
