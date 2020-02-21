@@ -18,9 +18,7 @@ public class ObjectPoolManager : MonoBehaviour
     public List<PoolModel> poolModels;
 
     private Dictionary<PoolTags, Queue<GameObject>> PoolsDictionary;
-
-
-
+    
     void Awake()
     {
         if(Instance == null)
@@ -56,7 +54,7 @@ public class ObjectPoolManager : MonoBehaviour
         {
             throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         }
-        
+
         return PoolsDictionary[tag].Dequeue();
     }
 
