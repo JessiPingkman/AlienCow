@@ -15,9 +15,9 @@ public class ObjectPoolManager : MonoBehaviour
 
     public List<PoolModel> poolModels;
 
-    public static Dictionary<string, Queue<GameObject>> PoolsDictionary;
+    public static Dictionary<PoolTags, Queue<GameObject>> PoolsDictionary;
 
-    private void InitializePoolsDictionary(Dictionary<string, Queue<GameObject>> InitializableDictionary)
+    private void InitializePoolsDictionary(Dictionary<PoolTags, Queue<GameObject>> InitializableDictionary)
     {
         foreach(PoolModel poolModel in poolModels)
         {
@@ -28,12 +28,20 @@ public class ObjectPoolManager : MonoBehaviour
                 objectPool.Enqueue(Instantiate(poolModel.prefab, poolModel.parent));
             }
 
-            InitializableDictionary.Add(poolModel.tag.ToString(), objectPool);
+            InitializableDictionary.Add(poolModel.tag, objectPool);
         }
-
     }
 
-    public void Awake()
+    public GameObject getFromPool(PoolTags tag){
+        if(PoolsDictionary[tag] == null) throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
+        return PoolsDictionary[tag].Dequeue();
+    }
+
+    public void ReturnToPool(PoolTags tag, GameObject obj){
+        PoolsDictionary[tag].Enqueue(obj);
+    }
+
+    void Awake()
     {
         InitializePoolsDictionary(PoolsDictionary);
     }
