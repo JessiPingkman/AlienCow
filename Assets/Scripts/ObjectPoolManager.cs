@@ -8,11 +8,11 @@ public class ObjectPoolManager : MonoBehaviour
     public static ObjectPoolManager Instance;
 
     [Serializable]
-    internal class PoolModel
+    internal struct PoolModel
     {
-        public PoolTags poolTag;
-        public GameObject poolPrefab;
-        public int poolSize;
+        public PoolTags tag;
+        public GameObject prefab;
+        public int size;
     }
 
 
@@ -43,14 +43,14 @@ public class ObjectPoolManager : MonoBehaviour
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i = 0; i<poolModel.poolSize; i++)
+            for(int i = 0; i<poolModel.size; i++)
             {
-                GameObject poolObject = Instantiate(poolModel.poolPrefab, transform);
+                GameObject poolObject = Instantiate(poolModel.prefab, transform);
                 poolObject.SetActive(false);
                 objectPool.Enqueue(poolObject);
             }
 
-            InitializableDictionary.Add(poolModel.poolTag, objectPool);
+            InitializableDictionary.Add(poolModel.tag, objectPool);
         }
     }
 

@@ -7,12 +7,12 @@ public abstract class Spawner : MonoBehaviour
     public PoolTags poolTag;
     public Transform objectParent;
     public Transform spawnPosition;
-    protected GameObject SpawnedObject;
+    protected GameObject spawnedObject;
 
     protected virtual void Spawn() 
     {
-        SpawnedObject = ObjectPoolManager.Instance.GetFromPool(poolTag);
-        SpawnedObject.transform.parent = objectParent;
-        SpawnedObject.transform.position = spawnPosition.position;
+        spawnedObject = ObjectPoolManager.Instance.GetFromPool(poolTag);
+        spawnedObject.transform.parent = objectParent;
+        spawnedObject.transform.position = spawnPosition.position;
     }
 }
