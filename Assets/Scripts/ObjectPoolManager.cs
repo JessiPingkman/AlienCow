@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance;
 
     [Serializable]
-    public class PoolModel
+    internal class PoolModel
     {
-        public PoolTags tag;
-        public GameObject prefab;
-        public int size;
-        public Transform parent;
+        public PoolTags Tag;
+        public GameObject Prefab;
+        public int Size;
     }
 
-    public List<PoolModel> poolModels;
 
-    private Dictionary<PoolTags, Queue<GameObject>> PoolsDictionary;
+    [SerializeField]
+    private List<PoolModel> poolModels;
+
+    private Dictionary<PoolTags, Queue<GameObject>> poolsDictionary;
     
     void Awake()
     {
@@ -30,7 +32,9 @@ public class ObjectPoolManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        InitializePoolsDictionary(PoolsDictionary);
+        poolsDictionary = new Dictionary<PoolTags, Queue<GameObject>>();
+        
+        InitializePoolsDictionary(poolsDictionary);
     }
 
     private void InitializePoolsDictionary(Dictionary<PoolTags, Queue<GameObject>> InitializableDictionary)
@@ -39,32 +43,40 @@ public class ObjectPoolManager : MonoBehaviour
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i = 0;i<poolModel.size;i++)
+            for(int i = 0; i<poolModel.Size; i++)
             {
-                objectPool.Enqueue(Instantiate(poolModel.prefab, poolModel.parent));
+                GameObject poolObject = Instantiate(poolModel.Prefab, transform);
+                poolObject.SetActive(false);
+                objectPool.Enqueue(poolObject);
             }
 
-            InitializableDictionary.Add(poolModel.tag, objectPool);
+            InitializableDictionary.Add(poolModel.Tag, objectPool);
         }
     }
 
     public GameObject GetFromPool(PoolTags tag)
     {
-        if(PoolsDictionary[tag] == null)
+        if(poolsDictionary[tag] == null)
         {
             throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         }
-
-        return PoolsDictionary[tag].Dequeue();
+        GameObject objectFromPool = poolsDictionary[tag].Dequeue();
+        objectFromPool.SetActive(true);
+        return objectFromPool;
     }
 
-    public void ReturnToPool(PoolTags tag, GameObject obj)
+    public void ReturnToPool(PoolTags tag, GameObject objectToReturn)
     {
-        if(PoolsDictionary[tag] == null)
+        if(poolsDictionary[tag] == null)
         {
             throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         }
+        
+        objectToReturn.SetActive(false);
+        poolsDictionary[tag].Enqueue(objectToReturn);
+    }
 
-        PoolsDictionary[tag].Enqueue(obj);
+    public int getPoolCount(PoolTags tag){
+        return poolsDictionary[tag].Count;
     }
 }
