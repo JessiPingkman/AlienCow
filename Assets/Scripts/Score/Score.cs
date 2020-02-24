@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public static int score;
     Text scoreText;
+
     void Start()
     {
         scoreText = GetComponent<Text>();
@@ -22,11 +21,11 @@ public class Score : MonoBehaviour
     {
         SaveSystem.SaveScore();
     }
+
     public void LoadScore() 
     {
         ScoreData data = SaveSystem.LoadScore();
         score = data.scoreData;
         scoreText.text = score.ToString();
     }
-
 }
