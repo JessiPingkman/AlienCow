@@ -5,13 +5,13 @@ public class Move : MonoBehaviour
     public float speed;
     public Transform target;
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rb;
     private float startTime;
     private float journeyLength;
 
     private void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         startTime = Time.time;
         journeyLength = Vector3.Distance(transform.position, target.position);
     }
@@ -25,6 +25,13 @@ public class Move : MonoBehaviour
     {
         float distCovered = (Time.time - startTime) * speed;
         float fractionOfJourney = distCovered / journeyLength;
-        rigidbody2D.position = Vector2.Lerp(transform.position, target.position, fractionOfJourney);
+        rb.position = Vector2.Lerp(transform.position, target.position, fractionOfJourney);
+    }
+
+    public void ChangeTarget(Transform newTarget)
+    {
+        target = newTarget;
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(transform.position, target.position);
     }
 }
