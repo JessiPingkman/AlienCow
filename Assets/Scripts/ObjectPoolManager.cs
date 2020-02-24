@@ -10,9 +10,9 @@ public class ObjectPoolManager : MonoBehaviour
     [Serializable]
     internal class PoolModel
     {
-        public PoolTags Tag;
-        public GameObject Prefab;
-        public int Size;
+        public PoolTags poolTag;
+        public GameObject poolPrefab;
+        public int poolSize;
     }
 
 
@@ -43,14 +43,14 @@ public class ObjectPoolManager : MonoBehaviour
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i = 0; i<poolModel.Size; i++)
+            for(int i = 0; i<poolModel.poolSize; i++)
             {
-                GameObject poolObject = Instantiate(poolModel.Prefab, transform);
+                GameObject poolObject = Instantiate(poolModel.poolPrefab, transform);
                 poolObject.SetActive(false);
                 objectPool.Enqueue(poolObject);
             }
 
-            InitializableDictionary.Add(poolModel.Tag, objectPool);
+            InitializableDictionary.Add(poolModel.poolTag, objectPool);
         }
     }
 
@@ -76,7 +76,7 @@ public class ObjectPoolManager : MonoBehaviour
         poolsDictionary[tag].Enqueue(objectToReturn);
     }
 
-    public int getPoolCount(PoolTags tag){
+    public int GetPoolCount(PoolTags tag){
         return poolsDictionary[tag].Count;
     }
 }
