@@ -677,12 +677,12 @@ PrefabInstance:
     - target: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.26
+      value: -6.199
       objectReference: {fileID: 0}
     - target: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.12
+      value: -2.428
       objectReference: {fileID: 0}
     - target: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
         type: 3}
@@ -764,10 +764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864f2ec83711b2046935bb2aa5bd3641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Count: 3
-  PoolTag: 1
-  Parent: {fileID: 508325315}
-  SpawnPosition: {fileID: 806611358}
+  spawnCount: 3
+  poolTag: 1
+  objectParent: {fileID: 508325315}
+  spawnPosition: {fileID: 806611358}
 --- !u!4 &806611358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
@@ -1041,14 +1041,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolModels:
-  - Tag: 1
-    Prefab: {fileID: 5564056086210707275, guid: e9d1c65685397354782aa9a1d757d55c,
+  - tag: 0
+    prefab: {fileID: 3595323856345567820, guid: 76014519159035b48860d52c4ad1e881,
       type: 3}
-    Size: 3
-  - Tag: 0
-    Prefab: {fileID: 3595323856345567820, guid: 76014519159035b48860d52c4ad1e881,
+    size: 100
+  - tag: 1
+    prefab: {fileID: 5564056086210707275, guid: e9d1c65685397354782aa9a1d757d55c,
       type: 3}
-    Size: 100
+    size: 3
 --- !u!4 &1496444223
 Transform:
   m_ObjectHideFlags: 0
