@@ -1,38 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
     [SerializeField]
-    private Transform gun;
+    private Transform _gun;
 
-    private void Update()
+    private void Update ()
     {
-        if(Input.GetMouseButtonDown(0))
+        UseGun ();
+        RotateToMousePosition ();
+    }
+
+    private void UseGun ()
+    {
+        if (Input.GetMouseButtonDown (0))
         {
             // RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             // if(hit.transform.GetComponent<Enemy>() != null)
             // {
             //     
             // }
-            
         }
-        RotateGun();
     }
 
-    private void RotateGun()
+    void RotateToMousePosition ()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float angle = (Vector2.Angle(Vector2.down, mousePosition - (Vector2)gun.transform.position) * _speed);
-        transform.eulerAngles = new Vector3(0f, 0f, angle);
+        Vector2 direction = Camera.main.ScreenToWorldPoint (Input.mousePosition) - transform.position;
+        float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, _speed * Time.deltaTime);
+        if(angle >= 65f){
+            Quaternion newRotation = Quaternion.AngleAxis(65f, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _speed);
+        }
+        else if(angle <= -50f){
+            Quaternion newRotation = Quaternion.AngleAxis(-50f, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _speed);
+        }
     }
 
-    private void Kill()
+    private void Die ()
     {
-        Destroy(gameObject);
+        Destroy (gameObject);
     }
 }
-

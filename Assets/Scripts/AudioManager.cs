@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private static AudioSource audio;
-    private static Dictionary<string, AudioClip> sounds = new Dictionary<string, AudioClip>();
+    private static AudioSource Audio;
+    private static Dictionary<string, AudioClip> Sounds = new Dictionary<string, AudioClip>();
 
     private void Awake()
     {
-        audio.GetComponent<AudioSource>();
+        Audio.GetComponent<AudioSource>();
         var soundsList = Resources.LoadAll<AudioClip>("/Sounds/");
         foreach(var sound in soundsList)
         {
-            sounds.Add(sound.name, sound);
+            Sounds.Add(sound.name, sound);
         }
     }
 
     public static void PlaySound(string name)
     {
-        audio.PlayOneShot(sounds[name]);
+        Audio.PlayOneShot(Sounds[name]);
     }
 }
