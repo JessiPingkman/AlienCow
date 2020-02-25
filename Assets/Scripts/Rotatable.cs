@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Rotateble : MonoBehaviour
 {
@@ -21,12 +19,12 @@ public class Rotateble : MonoBehaviour
         if(angle >= 10f)
         {
             Quaternion newRotation = Quaternion.AngleAxis(10f, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotateSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotateSpeed * Time.deltaTime);
         }
         else if(angle <= -50f)
         {
             Quaternion newRotation = Quaternion.AngleAxis(-50f, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotateSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, _rotateSpeed * Time.deltaTime);
         }
     }
 }
