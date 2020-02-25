@@ -4,15 +4,18 @@ using UnityEngine;
 public class Pet : MonoBehaviour
 {
     public float speed = 10;
+    public bool isFree = false;
     
     private Transform home;
     private Transform goalZone;
     private float timer = 0;
     private int timeToExit;
     private bool isStupid = false;
+    private Transform myTransform;
 
     private void Start()
     {
+        myTransform = GetComponent<Transform>();
         home = transform.parent;
         goalZone = GameObject.FindGameObjectWithTag(Tags.GoalZone.ToString()).transform;
         timeToExit = Random.Range(3, 10);
@@ -20,7 +23,7 @@ public class Pet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.CompareTag(Tags.FreePet.ToString()))
+        if (isFree)
         {
             Move();
         }
@@ -28,7 +31,8 @@ public class Pet : MonoBehaviour
 
     public void GoHome()
     {
-        transform.tag = Tags.FreePet.ToString();
+        myTransform.tag = Tags.FreePet.ToString();
+        isFree = true;
     }
 
     private void IsReadyToExit()
@@ -45,12 +49,12 @@ public class Pet : MonoBehaviour
     private void GoToGoalZone()
     {
         float step =  speed/4 * Time.deltaTime; 
-        transform.position = Vector3.MoveTowards(transform.position, goalZone.position, step);
+        myTransform.position = Vector3.MoveTowards(transform.position, goalZone.position, step);
     }
 
     private void Move()
     {
         float step =  speed * Time.deltaTime; 
-        transform.position = Vector3.MoveTowards(transform.position, home.position, step);
+        myTransform.position = Vector3.MoveTowards(transform.position, home.position, step);
     }
 }

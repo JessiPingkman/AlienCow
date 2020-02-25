@@ -24,6 +24,7 @@ public class Enemy : MortalEntity
             pet.SetParent(transform);
             pet.transform.localPosition = Vector2.zero;
             pet.tag = Tags.CapturedPet.ToString();
+            pet.GetComponent<Pet>().isFree = false;
             moveScript.ChangeTarget(goalZone.GetRandomTargetZone());
             animator.SetTrigger(Rotate);
             hasPet = true;
