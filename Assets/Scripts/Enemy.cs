@@ -43,13 +43,4 @@ public class Enemy : MortalEntity
         hasPet = false;
         gameObject.SetActive(false);
     }
-
-    private void Update()
-    {
-        if (Input.GetButton("Fire1"))
-        {
-            healthPoint -= 10;
-            CheckHeath();
-        }
-    }
 }
