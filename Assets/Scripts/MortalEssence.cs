@@ -12,5 +12,5 @@ public abstract class MortalEssence : MonoBehaviour
         }
     }
 
-    public abstract void Die();
+    protected abstract void Die();
 }

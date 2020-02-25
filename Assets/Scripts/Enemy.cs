@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 public class Enemy : MortalEssence
 {
@@ -22,14 +23,14 @@ public class Enemy : MortalEssence
             Transform pet = other.transform;
             pet.SetParent(transform);
             pet.transform.localPosition = Vector2.zero;
-            pet.tag = Tags.FreePet.ToString();
-            moveScript.ChangeTarget(goalZone.GetRandomZone());
+            pet.tag = Tags.CapturedPet.ToString();
+            moveScript.ChangeTarget(goalZone.GetRandomTargetZone());
             animator.SetTrigger(Rotate);
             hasPet = true;
         }
     }
 
-    public override void Die()
+    protected override void Die()
     {
         if (hasPet)
         {
@@ -40,5 +41,14 @@ public class Enemy : MortalEssence
 
         hasPet = false;
         gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            healthPoint -= 10;
+            CheckHeath();
+        }
     }
 }

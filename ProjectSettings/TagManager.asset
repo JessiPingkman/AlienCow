@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FreePet
   - CapturedPet
+  - GoalZone
   layers:
   - Default
   - TransparentFX
