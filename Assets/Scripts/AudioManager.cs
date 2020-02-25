@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -9,8 +8,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        Audio.GetComponent<AudioSource>();
-        var soundsList = Resources.LoadAll<AudioClip>("/Sounds/");
+        Audio = GetComponent<AudioSource>();
+        var soundsList = Resources.LoadAll<AudioClip>("Sounds");
+        Debug.Log(soundsList.Length);
         foreach(var sound in soundsList)
         {
             Sounds.Add(sound.name, sound);
