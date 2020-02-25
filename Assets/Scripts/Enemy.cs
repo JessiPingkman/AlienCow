@@ -29,6 +29,11 @@ public class Enemy : MortalEntity
             animator.SetTrigger(Rotate);
             hasPet = true;
         }
+
+        if (other.gameObject.GetComponent<GoalZone>() != null)
+        {
+            ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
+        }
     }
 
     protected override void Die()
@@ -41,6 +46,6 @@ public class Enemy : MortalEntity
         }
 
         hasPet = false;
-        gameObject.SetActive(false);
+        ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
 }
