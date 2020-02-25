@@ -4,7 +4,7 @@ public abstract class MortalEntity : MonoBehaviour
 {
     public float healthPoint = 10;
 
-    protected void CheckHeath()
+    public void CheckHeath()
     {
         if (healthPoint <= 0)
         {
