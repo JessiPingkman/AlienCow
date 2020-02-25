@@ -188,7 +188,7 @@ Canvas:
   m_GameObject: {fileID: 162513549}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -791,7 +791,7 @@ PrefabInstance:
     - target: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.296
+      value: -8.71
       objectReference: {fileID: 0}
     - target: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
         type: 3}

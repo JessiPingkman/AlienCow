@@ -28,9 +28,10 @@ public class GoalZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.CompareTag(Tags.CapturedPet.ToString()))
+        if (other.transform.GetComponent<Pet>())
         {
             CountPet();
+            other.gameObject.SetActive(false);
         }
     }
 

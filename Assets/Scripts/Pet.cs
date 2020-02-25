@@ -9,7 +9,7 @@ public class Pet : MonoBehaviour
     private Transform goalZone;
     private float timer = 0;
     private int timeToExit;
-    private bool isStupuid = false;
+    private bool isStupid = false;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class Pet : MonoBehaviour
         timeToExit = Random.Range(3, 10);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (transform.CompareTag(Tags.FreePet.ToString()))
         {
@@ -38,11 +38,11 @@ public class Pet : MonoBehaviour
         if(timer > timeToExit)
         {
             timer = 0;
-            isStupuid = true;
+            isStupid = true;
         }
     }
 
-    void GoToGoalZone()
+    private void GoToGoalZone()
     {
         float step =  speed/4 * Time.deltaTime; 
         transform.position = Vector3.MoveTowards(transform.position, goalZone.position, step);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class MortalEssence : MonoBehaviour
+public abstract class MortalEntity : MonoBehaviour
 {
     public float healthPoint = 10;
 

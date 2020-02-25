@@ -1,7 +1,7 @@
 ﻿using Enums;
 using UnityEngine;
 
-public class Enemy : MortalEssence
+public class Enemy : MortalEntity
 {
     public bool hasPet = false;
     public GoalZone goalZone;
