@@ -7,8 +7,6 @@ public class UIManager : MonoBehaviour
     private Text _score;
     [SerializeField]
     private Text _petAmount;
-    [SerializeField]
-    private Text _waveEnemyCount;
 
     [SerializeField]
     private Text _currentWave;
@@ -38,36 +36,36 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScoreLabel(float value)
     {
-        Instance._score.text = value.ToString();
+        _score.text = value.ToString();
     }
     public void UpdatePetAmountLabel(float value)
     {
-        Instance._petAmount.text = value.ToString();
+        _petAmount.text = value.ToString();
     }
 
-    public void UpdateWaveLabel(string count = "0", int countKillEnemy = 0, int currentWave = 0)
+    public void UpdateWaveLabel(int numberOfEnemyWave = 0, int killCounter = 0, int currentWave = 0)
     {
-       Instance._waveEnemyCount.text = count;
-       Instance._amountKillEnemy.text = "/" + countKillEnemy.ToString();
-       Instance._currentWave.text = currentWave.ToString();
+       _amountKillEnemy.text = numberOfEnemyWave.ToString() + "/" + killCounter.ToString();
+       _currentWave.text = currentWave.ToString();
     }
 
-    public void ShowWaveLabel()
+    public void ShowWaveLabel(int currentWave)
     {
-        Instance._wavePanel.SetActive(true);
+        _wavePanel.SetActive(true);
+        _currentWave.text = currentWave.ToString();
     }
 
     public void HideWavelabel()
     {
-        Instance._wavePanel.SetActive(false);
+        _wavePanel.SetActive(false);
     }
 
     public void ShowGameoverLabel()
     {
-        Instance._gameoverPanel.SetActive(true);
+        _gameoverPanel.SetActive(true);
     }
     public void HideGameoverLabel()
     {
-        Instance._gameoverPanel.SetActive(false);
+        _gameoverPanel.SetActive(false);
     }
 }
