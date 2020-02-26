@@ -5,20 +5,18 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text _score;
+
     [SerializeField]
     private Text _petAmount;
 
     [SerializeField]
-    private Text _currentWave;
+    private Text _waveText;
 
     [SerializeField]
-    private GameObject _wavePanel;
+    private GameObject _gameOverText;
 
     [SerializeField]
-    private GameObject _gameoverPanel;
-
-    [SerializeField]
-    private Text _amountKillEnemy;
+    private Text _killCounter;
 
     public static UIManager Instance;
 
@@ -34,38 +32,37 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateScoreLabel(float value)
+    public void UpdateScoreText(float value)
     {
-        _score.text = value.ToString();
-    }
-    public void UpdatePetAmountLabel(float value)
-    {
-        _petAmount.text = value.ToString();
+        _score.text = "Scores: "+value.ToString();
     }
 
-    public void UpdateWaveLabel(int numberOfEnemyWave = 0, int killCounter = 0, int currentWave = 0)
+    public void UpdateWaveText(string value)
     {
-       _amountKillEnemy.text = numberOfEnemyWave.ToString() + "/" + killCounter.ToString();
-       _currentWave.text = currentWave.ToString();
+        _waveText.text = "Wave "+value;
     }
 
-    public void ShowWaveLabel(int currentWave)
+    public void UpdatePetAmountText(float value)
     {
-        _wavePanel.SetActive(true);
-        _currentWave.text = currentWave.ToString();
+        _petAmount.text = "Pets: "+value.ToString();
     }
 
-    public void HideWavelabel()
+    public void UpdateKillCounterText(int maxEnemyCount = 0, int killCount = 0)
     {
-        _wavePanel.SetActive(false);
+       _killCounter.text = "Enemies: "+ killCount+" / "+maxEnemyCount;
     }
 
-    public void ShowGameoverLabel()
+    public void ShowWaveText(bool visible)
     {
-        _gameoverPanel.SetActive(true);
+        _waveText.gameObject.SetActive(visible);
     }
-    public void HideGameoverLabel()
+
+    public void ShowGameOverText()
     {
-        _gameoverPanel.SetActive(false);
+        _score.gameObject.SetActive(false);
+        _waveText.gameObject.SetActive(false);
+        _petAmount.gameObject.SetActive(false);
+        _killCounter.gameObject.SetActive(false);
+        _gameOverText.gameObject.SetActive(true);
     }
 }

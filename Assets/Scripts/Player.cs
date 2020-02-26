@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
                     if(entity.IsDeath())
                     {
                         CountKillEnemy++;
-                        UIManager.Instance.UpdateWaveLabel(killCounter: CountKillEnemy);
+                        // UIManager.Instance.UpdateWaveLabel(killCounter: CountKillEnemy);
                     }
                 }
             }

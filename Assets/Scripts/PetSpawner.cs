@@ -3,7 +3,7 @@
     private void Start() {
         for(int i = 0; i<spawnCount; i++)
         {
-            Spawn(spawnCount, spawnPosition.position);
+            Spawn(spawnPosition.position);
         }
     }
 }
