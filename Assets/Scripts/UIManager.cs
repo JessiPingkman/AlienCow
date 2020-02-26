@@ -22,45 +22,52 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _amountKillEnemy;
 
-    public static UIManager Self;
+    public static UIManager Instance;
 
     private void Awake()
     {
-        Self = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else if(Instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public static void UpdateScoreLabel(float value)
+    public void UpdateScoreLabel(float value)
     {
-        Self._score.text = value.ToString();
+        Instance._score.text = value.ToString();
     }
-    public static void UpdatePetAmountLabel(float value)
+    public void UpdatePetAmountLabel(float value)
     {
-        Self._petAmount.text = value.ToString();
-    }
-
-    public static void UpdateWaveLabel(string count = "0", int countKillEnemy = 0, int currentWave = 0)
-    {
-       Self._waveEnemyCount.text = count;
-       Self._amountKillEnemy.text = "/" + countKillEnemy.ToString();
-       Self._currentWave.text = currentWave.ToString();
+        Instance._petAmount.text = value.ToString();
     }
 
-    public static void ShowWaveLabel()
+    public void UpdateWaveLabel(string count = "0", int countKillEnemy = 0, int currentWave = 0)
     {
-        Self._wavePanel.SetActive(true);
+       Instance._waveEnemyCount.text = count;
+       Instance._amountKillEnemy.text = "/" + countKillEnemy.ToString();
+       Instance._currentWave.text = currentWave.ToString();
     }
 
-    public static void HideWavelabel()
+    public void ShowWaveLabel()
     {
-        Self._wavePanel.SetActive(false);
+        Instance._wavePanel.SetActive(true);
+    }
+
+    public void HideWavelabel()
+    {
+        Instance._wavePanel.SetActive(false);
     }
 
     public void ShowGameoverLabel()
     {
-        Self._gameoverPanel.SetActive(true);
+        Instance._gameoverPanel.SetActive(true);
     }
     public void HideGameoverLabel()
     {
-        Self._gameoverPanel.SetActive(false);
+        Instance._gameoverPanel.SetActive(false);
     }
 }

@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _damage;
-    public static int countKillEnemy;
+    public static int CountKillEnemy;
     private void FixedUpdate ()
     {
         UseGun ();
@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        countKillEnemy = 0;
+        CountKillEnemy = 0;
     }
 
     private void UseGun ()
@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
                     entity.healthPoint -= _damage;
                     if(entity.IsDeath())
                     {
-                        countKillEnemy++;
-                        UIManager.UpdateWaveLabel(countKillEnemy: countKillEnemy);
+                        CountKillEnemy++;
+                        UIManager.Instance.UpdateWaveLabel(countKillEnemy: CountKillEnemy);
                     }
                 }
             }
