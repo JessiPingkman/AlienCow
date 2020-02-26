@@ -1,19 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _damage;
-    private void FixedUpdate ()
+    
+    private Camera myCamera;
+
+    private void Awake()
+    {
+        myCamera = Camera.main;
+    }
+
+    private void Update ()
     {
         UseGun ();
     }
 
     private void UseGun ()
     {
-        if (Input.GetMouseButtonDown (0))
+        if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            Debug.Log("click");
+            Vector2 mousePos = Input.mousePosition;
+            RaycastHit2D hit = Physics2D.Raycast(myCamera.ScreenToWorldPoint(mousePos), Vector2.zero);
             if(hit.transform != null)
             {
                 Enemy entity = hit.transform.gameObject.GetComponent<Enemy>();
@@ -23,7 +34,14 @@ public class Player : MonoBehaviour
                     entity.CheckHeath();
                 }
             }
+            Explosion(myCamera.ScreenToWorldPoint(mousePos));
         }
+    }
+
+    private void Explosion(Vector2 spawnPosition)
+    {
+        GameObject explosionFx = ObjectPoolManager.Instance.GetFromPool(PoolTags.ExplosionFx);
+        explosionFx.transform.position = spawnPosition;
     }
 
     private void Die ()

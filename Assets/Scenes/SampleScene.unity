@@ -1047,6 +1047,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 806611358}
+    - target: {fileID: 540041997157323213, guid: 015e2e891754c456c9add749b5cef8ae,
+        type: 3}
+      propertyPath: speed
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1950372959118299252, guid: 015e2e891754c456c9add749b5cef8ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1553,6 +1558,9 @@ MonoBehaviour:
     prefab: {fileID: 5564056086210707275, guid: e9d1c65685397354782aa9a1d757d55c,
       type: 3}
     size: 3
+  - tag: 2
+    prefab: {fileID: 702192669826413242, guid: 3843624f850c6d34ead82163bd0688b9, type: 3}
+    size: 10
 --- !u!4 &1496444223
 Transform:
   m_ObjectHideFlags: 0
@@ -2119,6 +2127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: _damage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7618850088124742543, guid: b58a07dac79657e45be424bb8df2e14f,
         type: 3}

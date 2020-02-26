@@ -1,5 +1,6 @@
 ﻿public enum PoolTags
 {
     Aliens,
-    Pets
+    Pets,
+    ExplosionFx
 }
