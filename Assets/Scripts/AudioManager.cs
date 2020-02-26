@@ -10,7 +10,6 @@ public class AudioManager : MonoBehaviour
     {
         Audio = GetComponent<AudioSource>();
         var soundsList = Resources.LoadAll<AudioClip>("Sounds");
-        Debug.Log(soundsList.Length);
         foreach(var sound in soundsList)
         {
             Sounds.Add(sound.name, sound);

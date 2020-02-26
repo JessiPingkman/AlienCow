@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("click");
             Vector2 mousePos = Input.mousePosition;
             RaycastHit2D hit = Physics2D.Raycast(myCamera.ScreenToWorldPoint(mousePos), Vector2.zero);
             if(hit.transform != null)
