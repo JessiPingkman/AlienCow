@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
     private float startTime;
     private float journeyLength;
 
-    private void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         startTime = Time.time;

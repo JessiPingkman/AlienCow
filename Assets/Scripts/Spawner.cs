@@ -8,10 +8,19 @@ public abstract class Spawner : MonoBehaviour
     public Transform spawnPosition;
     protected GameObject spawnedObject;
 
-    protected virtual void Spawn() 
+    protected virtual void Spawn(int spawnCount, Vector3 spawnPosition) 
     {
+        if(ObjectPoolManager.Instance.GetPoolCount(poolTag) == 0)
+        {
+            throw new UnityException("Pool count is 0");
+        }
+
         spawnedObject = ObjectPoolManager.Instance.GetFromPool(poolTag);
-        spawnedObject.transform.parent = objectParent;
-        spawnedObject.transform.position = spawnPosition.position;
+        spawnedObject.transform.position = spawnPosition;
+        
+        if(objectParent != null)
+        {
+            spawnedObject.transform.parent = objectParent;
+        }
     }
 }
