@@ -32,6 +32,7 @@ public class Enemy : MortalEntity
 
         if (other.gameObject.GetComponent<GoalZone>() != null)
         {
+            Debug.Log("OOPS!");
             ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
         }
     }
