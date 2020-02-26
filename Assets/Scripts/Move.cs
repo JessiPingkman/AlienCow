@@ -9,16 +9,21 @@ public class Move : MonoBehaviour
     private float startTime;
     private float journeyLength;
 
-    void Awake()
+    private void OnEnable() 
     {
-        rb = GetComponent<Rigidbody2D>();
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, target.position);
+        Initialize();
     }
 
     private void FixedUpdate()
     {
         MoveForward();
+    }
+
+    private void Initialize()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(transform.position, target.position);
     }
 
     private void MoveForward()

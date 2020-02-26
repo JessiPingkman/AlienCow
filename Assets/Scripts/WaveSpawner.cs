@@ -9,7 +9,7 @@ public class WaveSpawner : Spawner
 
     private float spawnTimer = 0;
     private float waveTimer = 0;
-    private int currentWaveNumber;
+    private int currentWaveNumber = 1;
     private int spawnedObjectsCount;
 
     private void Update() 
