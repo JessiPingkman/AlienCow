@@ -4,7 +4,7 @@ public class Move : MonoBehaviour
 {
     public float speed;
     public Transform target;
-
+    
     private Rigidbody2D rb;
     private float startTime;
     private float journeyLength;

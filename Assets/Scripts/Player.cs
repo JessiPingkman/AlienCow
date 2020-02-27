@@ -8,12 +8,9 @@ public class Player : MonoBehaviour
     
     private Camera myCamera;
     
-    public static int CountKillEnemy;
-
     private void Awake()
     {
         myCamera = Camera.main;
-        CountKillEnemy = 0;
     }
 
     private void Update ()
@@ -33,11 +30,7 @@ public class Player : MonoBehaviour
                 if(entity != null)
                 {
                     entity.healthPoint -= _damage;
-                    if(entity.IsDeath())
-                    {
-                        CountKillEnemy++;
-                        // UIManager.Instance.UpdateWaveLabel(killCounter: CountKillEnemy);
-                    }
+                    entity.CheckDeath();
                 }
             }
             Explosion(myCamera.ScreenToWorldPoint(mousePos));

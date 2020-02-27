@@ -30,28 +30,7 @@ public class GoalZone : MonoBehaviour
     {
         if (other.transform.GetComponent<Pet>())
         {
-            CountPet();
             other.gameObject.SetActive(false);
         }
-    }
-
-    private void CountPet()
-    {
-        petAmount++;
-        UpdateText();
-        if (petAmount >= spawnerScript.spawnCount)
-        {
-            GameOver();
-        }
-    }
-
-    private void UpdateText()
-    {
-        petAoumtText.text = petAmount.ToString();
-    }
-
-    private void GameOver()
-    {
-        return;
     }
 }

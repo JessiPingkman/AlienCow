@@ -4,14 +4,12 @@ public abstract class MortalEntity : MonoBehaviour
 {
     public float healthPoint = 10;
 
-    public bool IsDeath()
+    public void CheckDeath()
     {
         if (healthPoint <= 0)
         {
             Die();
-            return true;
         }
-        return false;
     }
 
     protected abstract void Die();

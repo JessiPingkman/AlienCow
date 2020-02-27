@@ -4,6 +4,7 @@
     {
         FreePet,
         CapturedPet,
-        GoalZone
+        GoalZone,
+        PetSpawner
     }
 }

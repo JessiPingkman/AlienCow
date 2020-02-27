@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MortalEntity
 {
     public bool hasPet = false;
+
     public GoalZone goalZone;
 
     private Move moveScript;
@@ -35,6 +36,11 @@ public class Enemy : MortalEntity
         {
             Debug.Log("OOPS!");
             ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
+        }
+
+        if(other.gameObject.CompareTag(Tags.PetSpawner.ToString()) && CountManager.Instance.GetCounter(CounterTags.pets) == 0)
+        {
+            UIManager.Instance.ShowGameOverPanel();
         }
     }
 

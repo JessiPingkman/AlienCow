@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     private Text _waveText;
 
     [SerializeField]
-    private GameObject _gameOverText;
+    private GameObject _gameOverPanel;
 
     private Dictionary<CounterTags, TextCounter> counterTextsDictionary;
 
@@ -55,13 +55,13 @@ public class UIManager : MonoBehaviour
         _waveText.gameObject.SetActive(visible);
     }
 
-    public void ShowGameOverText()
+    public void ShowGameOverPanel()
     {
         foreach(TextCounter counterText in counterTexts)
         {
             counterText.counter.gameObject.SetActive(false);
         }
         _waveText.gameObject.SetActive(false);
-        _gameOverText.gameObject.SetActive(true);
+        _gameOverPanel.SetActive(true);
     }
 }
