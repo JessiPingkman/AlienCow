@@ -2,5 +2,6 @@
 {
     scores,
     kills,
+    totalKills,
     pets
 }

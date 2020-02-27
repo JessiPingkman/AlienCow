@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update() 
     {
-        if(textTimer.CountTo(3))
+        if(textTimer.CountTo(4))
         {
             UIManager.Instance.ShowWaveText(false);
             textTimer.Restart();
@@ -57,6 +57,10 @@ public class WaveManager : MonoBehaviour
         {
             if(!_waveIsComplete)
             {
+                if(CountManager.Instance.GetCounter(CounterTags.kills) < _maxCount){
+                    return;
+                }
+                
                 CompleteTheWave();
                 UIManager.Instance.ShowWaveText(true);
             }
@@ -96,6 +100,9 @@ public class WaveManager : MonoBehaviour
 
     private void PrepareNextWave()
     {
+        var kills = CountManager.Instance.GetCounter(CounterTags.kills);
+
+        CountManager.Instance.Decrement(CounterTags.kills, kills);
         _maxCount += currentWaveNumber*2;
         currentWaveNumber++;
     }

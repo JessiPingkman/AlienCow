@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         }
 
         counterTextsDictionary = new Dictionary<CounterTags, TextCounter>();
-        
+
         foreach(TextCounter counterText in counterTexts)
         {   
             counterTextsDictionary.Add(counterText.counterTag, counterText);
@@ -37,7 +37,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCounterText(CounterTags tag, int count)
     {
-       counterTextsDictionary[tag].counter.text = tag.ToString()+": "+count;
+        if(counterTextsDictionary.ContainsKey(tag) == false)
+        {
+            return;
+        }
+
+        counterTextsDictionary[tag].counter.text = tag.ToString()+": "+count;
     }
 
     public void UpdateWaveText(string value)

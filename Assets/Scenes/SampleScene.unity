@@ -294,7 +294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Morties: 0'
+  m_Text: 0
 --- !u!222 &240002732
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Scores: 0'
+  m_Text: 0
 --- !u!222 &1052615729
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1589,7 +1589,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Enemies: 0/0'
+  m_Text: 0
 --- !u!222 &1284598775
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1768,9 +1768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTexts:
-  - counterTag: 2
+  - counterTag: 3
     counter: {fileID: 240002731}
-  - counterTag: 1
+  - counterTag: 2
     counter: {fileID: 1284598774}
   - counterTag: 0
     counter: {fileID: 1052615728}
@@ -2319,11 +2319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counters:
-  - counterTag: 2
+  - counterTag: 3
     counter: 3
-  - counterTag: 1
+  - counterTag: 2
     counter: 0
   - counterTag: 0
+    counter: 0
+  - counterTag: 1
     counter: 0
 --- !u!1 &2025009409
 GameObject:

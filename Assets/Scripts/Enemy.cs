@@ -45,11 +45,12 @@ public class Enemy : MortalEntity
             var pet = transform.GetChild(0);
             pet.SetParent(null);
             pet.GetComponent<Pet>().GoHome();
-            CountManager.Instance.Increment(CounterTags.pets, 1); 
+            CountManager.Instance.Increment(CounterTags.pets, 1);
         }
 
         hasPet = false;
         CountManager.Instance.Increment(CounterTags.kills, 1);
+        CountManager.Instance.Increment(CounterTags.totalKills, 1);
         CountManager.Instance.Increment(CounterTags.scores, 1);
         ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
