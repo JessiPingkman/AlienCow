@@ -55,9 +55,13 @@ public class Enemy : MortalEntity
         }
 
         hasPet = false;
+        GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTags.EnemyLimbs);
+        particle.transform.position = transform.position;
+        
         CountManager.Instance.Increment(CounterTags.kills, 1);
         CountManager.Instance.Increment(CounterTags.totalKills, 1);
         CountManager.Instance.Increment(CounterTags.scores, 1);
+
         ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
 }

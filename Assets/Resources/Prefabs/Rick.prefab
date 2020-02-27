@@ -106,7 +106,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6217030288377082833}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0827678, w: 0.99656886}
+  m_LocalRotation: {x: 0, y: 0, z: -0.08276471, w: 0.99656916}
   m_LocalPosition: {x: -7.52, y: 3.29, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -130,6 +130,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
+  sounds:
+  - Lick
+  - Allah Akbar
+  - WabuLabuDubDub
+  - Haha yeah_sound
 --- !u!114 &6217030288377082832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
-  _angleUpRotate: 0
-  _angleDownRotate: 0
+  _angleUpRotate: 10
+  _angleDownRotate: -50
 --- !u!1 &6217030288465990232
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,8 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 10
-  _angleUpRotate: 0
-  _angleDownRotate: 0
+  _angleUpRotate: 5
+  _angleDownRotate: -50
 --- !u!1 &6217030288546334725
 GameObject:
   m_ObjectHideFlags: 0
