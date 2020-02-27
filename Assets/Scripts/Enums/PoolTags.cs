@@ -2,5 +2,6 @@
 {
     Aliens,
     Pets,
-    ExplosionFx
+    ExplosionFx,
+    EnemyLimbs
 }
