@@ -46,6 +46,8 @@ public class Enemy : MortalEntity
         }
 
         hasPet = false;
+        GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTags.EnemyLimbs);
+        particle.transform.position = transform.position;
         ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
 }

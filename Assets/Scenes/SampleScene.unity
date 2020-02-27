@@ -1710,7 +1710,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _score: {fileID: 1052615728}
   _petAmount: {fileID: 240002731}
-  _waveEnemyCount: {fileID: 1783489811}
   _currentWave: {fileID: 743575502}
   _wavePanel: {fileID: 0}
   _gameoverPanel: {fileID: 0}
@@ -1769,6 +1768,10 @@ MonoBehaviour:
     size: 3
   - tag: 2
     prefab: {fileID: 702192669826413242, guid: 3843624f850c6d34ead82163bd0688b9, type: 3}
+    size: 10
+  - tag: 3
+    prefab: {fileID: 4692519785264403103, guid: 7e6bc8b1bacb446e39d71ff32430a0f3,
+      type: 3}
     size: 10
 --- !u!4 &1496444223
 Transform:
