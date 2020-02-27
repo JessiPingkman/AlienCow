@@ -687,10 +687,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fa0658eb6f3f54e901118c3fe4329e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerObject: {fileID: 4900745921454501925}
+  _spawner: {fileID: 4900745921454501927}
   _maxCount: 10
-  _waveInterval: 100
-  _spawnInterval: 1000
+  _waveInterval: 10
+  _spawnInterval: 1
   _waveIsComplete: 0
 --- !u!4 &526165671
 Transform:
@@ -1767,11 +1767,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72084580abcc6c04e831b85772d339e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: {fileID: 1052615728}
-  _petAmount: {fileID: 240002731}
+  counterTexts:
+  - counterTag: 2
+    counter: {fileID: 240002731}
+  - counterTag: 1
+    counter: {fileID: 1284598774}
+  - counterTag: 0
+    counter: {fileID: 1052615728}
   _waveText: {fileID: 1783489811}
   _gameOverText: {fileID: 439722508}
-  _killCounter: {fileID: 1284598774}
 --- !u!4 &1483217749
 Transform:
   m_ObjectHideFlags: 0
@@ -2271,6 +2275,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2017278834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017278835}
+  - component: {fileID: 2017278836}
+  m_Layer: 0
+  m_Name: CountManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2017278835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017278834}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 198, y: 23.900002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2017278836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017278834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31798d8850fe0246a8d34f5099a6a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counters:
+  - counterTag: 2
+    counter: 3
+  - counterTag: 1
+    counter: 0
+  - counterTag: 0
+    counter: 0
 --- !u!1 &2025009409
 GameObject:
   m_ObjectHideFlags: 0

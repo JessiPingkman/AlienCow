@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Text _score;
-
-    [SerializeField]
-    private Text _petAmount;
+    public List<TextCounter> counterTexts;
 
     [SerializeField]
     private Text _waveText;
@@ -15,8 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameOverText;
 
-    [SerializeField]
-    private Text _killCounter;
+    private Dictionary<CounterTags, TextCounter> counterTextsDictionary;
 
     public static UIManager Instance;
 
@@ -30,26 +26,23 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        counterTextsDictionary = new Dictionary<CounterTags, TextCounter>();
+        
+        foreach(TextCounter counterText in counterTexts)
+        {   
+            counterTextsDictionary.Add(counterText.counterTag, counterText);
+        }
     }
 
-    public void UpdateScoreText(float value)
+    public void UpdateCounterText(CounterTags tag, int count)
     {
-        _score.text = "Scores: "+value.ToString();
+       counterTextsDictionary[tag].counter.text = tag.ToString()+": "+count;
     }
 
     public void UpdateWaveText(string value)
     {
         _waveText.text = "Wave "+value;
-    }
-
-    public void UpdatePetAmountText(float value)
-    {
-        _petAmount.text = "Pets: "+value.ToString();
-    }
-
-    public void UpdateKillCounterText(int maxEnemyCount = 0, int killCount = 0)
-    {
-       _killCounter.text = "Enemies: "+ killCount+" / "+maxEnemyCount;
     }
 
     public void ShowWaveText(bool visible)
@@ -59,10 +52,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverText()
     {
-        _score.gameObject.SetActive(false);
+        foreach(TextCounter counterText in counterTexts)
+        {
+            counterText.counter.gameObject.SetActive(false);
+        }
         _waveText.gameObject.SetActive(false);
-        _petAmount.gameObject.SetActive(false);
-        _killCounter.gameObject.SetActive(false);
         _gameOverText.gameObject.SetActive(true);
     }
 }

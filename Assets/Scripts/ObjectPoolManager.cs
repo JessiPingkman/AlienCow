@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance;

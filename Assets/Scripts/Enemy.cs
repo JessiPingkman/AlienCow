@@ -28,6 +28,7 @@ public class Enemy : MortalEntity
             moveScript.ChangeTarget(goalZone.GetRandomTargetZone());
             animator.SetTrigger(Rotate);
             hasPet = true;
+            CountManager.Instance.Decrement(CounterTags.pets, 1); 
         }
 
         if (other.gameObject.GetComponent<GoalZone>() != null)
@@ -44,9 +45,12 @@ public class Enemy : MortalEntity
             var pet = transform.GetChild(0);
             pet.SetParent(null);
             pet.GetComponent<Pet>().GoHome();
+            CountManager.Instance.Increment(CounterTags.pets, 1); 
         }
 
         hasPet = false;
+        CountManager.Instance.Increment(CounterTags.kills, 1);
+        CountManager.Instance.Increment(CounterTags.scores, 1);
         ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
 }
