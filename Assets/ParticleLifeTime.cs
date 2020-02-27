@@ -4,14 +4,14 @@ public class ParticleLifeTime : MonoBehaviour
 {
     private ParticleSystem particle;
     
-    void Start()
+    void Awake()
     {
         particle = GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if(particle)
+        if(particle != null)
         {
             if(!particle.IsAlive())
             {
