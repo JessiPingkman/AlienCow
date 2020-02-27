@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
     private float _damage;
     
     private Camera myCamera;
-    
+    private SoundEvent soundEvent;
+    public string[] sounds;
     public static int CountKillEnemy;
 
     private void Awake()
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour
                     {
                         CountKillEnemy++;
                         UIManager.Instance.UpdateWaveLabel(killCounter: CountKillEnemy);
+                        if (CountKillEnemy%5==0)
+                        {
+                        AudioManager.PlaySound(sounds[UnityEngine.Random.Range(0,sounds.Length-1)]);
+                        }
                     }
                 }
             }
