@@ -24,10 +24,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePos = Input.mousePosition;
+            Vector3 mousePos = Input.mousePosition;
             RaycastHit2D hit = Physics2D.Raycast(myCamera.ScreenToWorldPoint(mousePos), Vector2.zero);
-            if(hit.transform != null)
+            if(hit.transform != null )
             {
+                Debug.Log(hit.collider.name);
                 Enemy entity = hit.transform.gameObject.GetComponent<Enemy>();
                 if(entity != null)
                 {
