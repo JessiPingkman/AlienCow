@@ -130,6 +130,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
+  sounds:
+  - Lick
+  - Allah Akbar
+  - WabuLabuDubDub
+  - Haha yeah_sound
+  - Number One is me
 --- !u!114 &6217030288377082832
 MonoBehaviour:
   m_ObjectHideFlags: 0
