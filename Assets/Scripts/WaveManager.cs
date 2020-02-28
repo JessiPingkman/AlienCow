@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     private Timer textTimer;
     private Timer waveTimer;
     private Timer spawnTimer;
+    private float _maxSpawnInterval;
     private int currentWaveNumber;
     private int spawnedObjectsCount;
 
@@ -28,6 +29,7 @@ public class WaveManager : MonoBehaviour
         textTimer = new Timer();
         waveTimer = new Timer();
         spawnTimer = new Timer();
+        _maxSpawnInterval = _spawnInterval;
     }
 
     private void Start() 
@@ -46,7 +48,7 @@ public class WaveManager : MonoBehaviour
 
         if(spawnedObjectsCount < _maxCount && !_waveIsComplete)
         {
-            if(spawnTimer.CountTo(_spawnInterval) == false)
+            if(spawnTimer.CountTo(Random.Range(_maxSpawnInterval, _spawnInterval)) == false)
             {
                 return;
             }
@@ -101,9 +103,9 @@ public class WaveManager : MonoBehaviour
     private void PrepareNextWave()
     {
         var kills = CountManager.Instance.GetCounter(CounterTags.kills);
-
         CountManager.Instance.Decrement(CounterTags.kills, kills);
-        _maxCount += currentWaveNumber*2;
+        _maxCount += currentWaveNumber*3;
+        _spawnInterval -= 0.05f;
         currentWaveNumber++;
     }
 
