@@ -23,7 +23,8 @@ public class WaveManager : MonoBehaviour
     private int spawnedObjectsCount;
 
 
-    private void Awake() {
+    private void Awake() 
+    {
         currentWaveNumber = 1;
         textTimer = new Timer();
         waveTimer = new Timer();
@@ -57,7 +58,8 @@ public class WaveManager : MonoBehaviour
         {
             if(!_waveIsComplete)
             {
-                if(CountManager.Instance.GetCounter(CounterTags.kills) < _maxCount){
+                if(CountManager.Instance.GetCounter(CounterTags.kills) < _maxCount)
+                {
                     return;
                 }
                 
@@ -87,7 +89,6 @@ public class WaveManager : MonoBehaviour
             _spawner.Spawn(new Vector3(_spawner.spawnPosition.position.x, Random.Range(-5.5f, -3f), _spawner.spawnPosition.position.z));
             spawnedObjectsCount++;
         }
-            
     }
 
     private void CompleteTheWave()
