@@ -129,12 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6564ca40a63bc444db7070cb94c8d104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 5
   sounds:
   - Lick
   - Allah Akbar
   - WabuLabuDubDub
   - Haha yeah_sound
+  - Number One is me
 --- !u!114 &6217030288377082832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 5
-  _angleUpRotate: 10
+  _angleUpRotate: 3.2
   _angleDownRotate: -50
 --- !u!1 &6217030288465990232
 GameObject:

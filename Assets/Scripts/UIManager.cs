@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Text _score;
-    [SerializeField]
-    private Text _petAmount;
+    public List<TextCounter> counterTexts;
 
     [SerializeField]
-    private Text _currentWave;
+    private Text _waveText;
 
     [SerializeField]
-    private GameObject _wavePanel;
+    private GameObject _gameOverPanel;
 
-    [SerializeField]
-    private GameObject _gameoverPanel;
-
-    [SerializeField]
-    private Text _amountKillEnemy;
+    private Dictionary<CounterTags, TextCounter> counterTextsDictionary;
 
     public static UIManager Instance;
 
@@ -32,40 +26,42 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        counterTextsDictionary = new Dictionary<CounterTags, TextCounter>();
+
+        foreach(TextCounter counterText in counterTexts)
+        {   
+            counterTextsDictionary.Add(counterText.counterTag, counterText);
+        }
     }
 
-    public void UpdateScoreLabel(float value)
+    public void UpdateCounterText(CounterTags tag, int count)
     {
-        _score.text = value.ToString();
-    }
-    public void UpdatePetAmountLabel(float value)
-    {
-        _petAmount.text = value.ToString();
+        if(counterTextsDictionary.ContainsKey(tag) == false)
+        {
+            return;
+        }
+
+        counterTextsDictionary[tag].counter.text = tag.ToString()+": "+count;
     }
 
-    public void UpdateWaveLabel(int numberOfEnemyWave = 0, int killCounter = 0, int currentWave = 0)
+    public void UpdateWaveText(string value)
     {
-       _amountKillEnemy.text = numberOfEnemyWave.ToString() + "/" + killCounter.ToString();
-       _currentWave.text = currentWave.ToString();
+        _waveText.text = "Wave "+value;
     }
 
-    public void ShowWaveLabel(int currentWave)
+    public void ShowWaveText(bool visible)
     {
-        _wavePanel.SetActive(true);
-        _currentWave.text = currentWave.ToString();
+        _waveText.gameObject.SetActive(visible);
     }
 
-    public void HideWavelabel()
+    public void ShowGameOverPanel()
     {
-        _wavePanel.SetActive(false);
-    }
-
-    public void ShowGameoverLabel()
-    {
-        _gameoverPanel.SetActive(true);
-    }
-    public void HideGameoverLabel()
-    {
-        _gameoverPanel.SetActive(false);
+        foreach(TextCounter counterText in counterTexts)
+        {
+            counterText.counter.gameObject.SetActive(false);
+        }
+        _waveText.gameObject.SetActive(false);
+        _gameOverPanel.SetActive(true);
     }
 }

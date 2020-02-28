@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -8,13 +7,12 @@ public class Player : MonoBehaviour
     
     private Camera myCamera;
     private SoundEvent soundEvent;
+    
     public string[] sounds;
-    public static int CountKillEnemy;
 
     private void Awake()
     {
         myCamera = Camera.main;
-        CountKillEnemy = 0;
     }
 
     private void Update ()
@@ -26,22 +24,19 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePos = Input.mousePosition;
+            Vector3 mousePos = Input.mousePosition;
             RaycastHit2D hit = Physics2D.Raycast(myCamera.ScreenToWorldPoint(mousePos), Vector2.zero);
-            if(hit.transform != null)
+            if(hit.transform != null )
             {
                 Enemy entity = hit.transform.gameObject.GetComponent<Enemy>();
                 if(entity != null)
                 {
                     entity.healthPoint -= _damage;
-                    if(entity.IsDeath())
+                    entity.CheckDeath();
+
+                    if (CountManager.Instance.GetCounter(CounterTags.totalKills)%5==0)
                     {
-                        CountKillEnemy++;
-                        UIManager.Instance.UpdateWaveLabel(killCounter: CountKillEnemy);
-                        if (CountKillEnemy%5==0)
-                        {
                         AudioManager.PlaySound(sounds[UnityEngine.Random.Range(0,sounds.Length-1)]);
-                        }
                     }
                 }
             }

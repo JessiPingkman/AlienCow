@@ -4,21 +4,26 @@ public class Move : MonoBehaviour
 {
     public float speed;
     public Transform target;
-
+    
     private Rigidbody2D rb;
     private float startTime;
     private float journeyLength;
 
-    private void Start()
+    private void OnEnable() 
     {
-        rb = GetComponent<Rigidbody2D>();
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, target.position);
+        Initialize();
     }
 
     private void FixedUpdate()
     {
         MoveForward();
+    }
+
+    private void Initialize()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        startTime = Time.time;
+        journeyLength = Vector3.Distance(transform.position, target.position);
     }
 
     private void MoveForward()

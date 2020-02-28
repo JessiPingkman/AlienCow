@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MortalEntity
 {
     public bool hasPet = false;
+
     public GoalZone goalZone;
 
     private Move moveScript;
@@ -28,11 +29,18 @@ public class Enemy : MortalEntity
             moveScript.ChangeTarget(goalZone.GetRandomTargetZone());
             animator.SetTrigger(Rotate);
             hasPet = true;
+            CountManager.Instance.Decrement(CounterTags.pets, 1); 
         }
 
         if (other.gameObject.GetComponent<GoalZone>() != null)
         {
+            Debug.Log("OOPS!");
             ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
+        }
+
+        if(other.gameObject.CompareTag(Tags.PetSpawner.ToString()) && CountManager.Instance.GetCounter(CounterTags.pets) == 0)
+        {
+            UIManager.Instance.ShowGameOverPanel();
         }
     }
 
@@ -43,11 +51,17 @@ public class Enemy : MortalEntity
             var pet = transform.GetChild(0);
             pet.SetParent(null);
             pet.GetComponent<Pet>().GoHome();
+            CountManager.Instance.Increment(CounterTags.pets, 1);
         }
 
         hasPet = false;
         GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTags.EnemyLimbs);
         particle.transform.position = transform.position;
+        
+        CountManager.Instance.Increment(CounterTags.kills, 1);
+        CountManager.Instance.Increment(CounterTags.totalKills, 1);
+        CountManager.Instance.Increment(CounterTags.scores, 1);
+
         ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
     }
 }
