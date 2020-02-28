@@ -122,3 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  isFree: 0
+  sounds:
+  - The Hell was that_sound
+  - Oh GEEZ_sound

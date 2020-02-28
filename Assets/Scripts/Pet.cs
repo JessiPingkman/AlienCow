@@ -12,6 +12,8 @@ public class Pet : MonoBehaviour
     private int timeToExit;
     private bool isStupid = false;
     private Transform myTransform;
+    public string[] sounds;
+    private string stupidSound = "A chicken would say_sound";
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class Pet : MonoBehaviour
     {
         myTransform.tag = Tags.FreePet.ToString();
         isFree = true;
+        AudioManager.PlaySound(sounds[UnityEngine.Random.Range(0,sounds.Length-1)]);
     }
 
     private void IsReadyToExit()
@@ -43,6 +46,7 @@ public class Pet : MonoBehaviour
         {
             timer = 0;
             isStupid = true;
+            AudioManager.PlaySound(stupidSound);
         }
     }
 
