@@ -2829,6 +2829,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rick
       objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[0]
+      value: Allah Akbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[1]
+      value: Aww crap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[2]
+      value: 'Burn out the CPU '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[3]
+      value: Haha yeah_sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[4]
+      value: Lick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[5]
+      value: Number One is me
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[6]
+      value: Screw this, I'm out
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[7]
+      value: Uh oh
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[8]
+      value: WabuLabuDubDub
+      objectReference: {fileID: 0}
     - target: {fileID: 7618850088124742543, guid: b58a07dac79657e45be424bb8df2e14f,
         type: 3}
       propertyPath: m_LocalPosition.x
