@@ -5,25 +5,25 @@ using Random = UnityEngine.Random;
 
 public class GoalZone : MonoBehaviour
 {
-    public Spawner spawnerScript;
-    public Text petAoumtText;
+    public Spawner SpawnerScript;
+    public Text PetAmountText;
     
-    private Transform[] zones;
-    private int petAmount = 0;
+    private Transform[] _zones;
+    private int _petAmount = 0;
 
     private void Start()
     {
-        zones = new Transform[transform.childCount];
+        _zones = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
-            zones[i] = transform.GetChild(i);
+            _zones[i] = transform.GetChild(i);
         }
     }
 
     public Transform GetRandomTargetZone()
     {
-        int zoneCount = zones.Length;
-        return zones[Random.Range(0, zoneCount)];
+        int zoneCount = _zones.Length;
+        return _zones[Random.Range(0, zoneCount)];
     }
 
     private void OnTriggerEnter2D(Collider2D other)

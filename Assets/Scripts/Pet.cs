@@ -3,29 +3,29 @@ using UnityEngine;
 
 public class Pet : MonoBehaviour
 {
-    public float speed = 10;
-    public bool isFree = false;
+    public float Speed = 10;
+    public bool IsFree = false;
+    public string[] Sounds;
     
-    private Transform home;
-    private Transform goalZone;
-    private float timer = 0;
-    private int timeToExit;
-    private bool isStupid = false;
-    private Transform myTransform;
-    public string[] sounds;
-    private string stupidSound = "A chicken would say_sound";
+    private Transform _home;
+    private Transform _goalZone;
+    private float _timer = 0;
+    private int _timeToExit;
+    private bool _isStupid = false;
+    private Transform _myTransform;
+    private string _stupidSound = "A chicken would say_sound";
 
     private void Start()
     {
-        myTransform = GetComponent<Transform>();
-        home = transform.parent;
-        goalZone = GameObject.FindGameObjectWithTag(Tags.GoalZone.ToString()).transform;
-        timeToExit = Random.Range(3, 10);
+        _myTransform = GetComponent<Transform>();
+        _home = transform.parent;
+        _goalZone = GameObject.FindGameObjectWithTag(GameObjectTag.GoalZone.ToString()).transform;
+        _timeToExit = Random.Range(3, 10);
     }
 
     private void FixedUpdate()
     {
-        if (isFree)
+        if (IsFree)
         {
             Move();
         }
@@ -33,32 +33,32 @@ public class Pet : MonoBehaviour
 
     public void GoHome()
     {
-        myTransform.tag = Tags.FreePet.ToString();
-        isFree = true;
-        AudioManager.PlaySound(sounds[UnityEngine.Random.Range(0,sounds.Length-1)]);
+        _myTransform.tag = GameObjectTag.FreePet.ToString();
+        IsFree = true;
+        AudioManager.PlaySound(Sounds[UnityEngine.Random.Range(0,Sounds.Length-1)]);
     }
 
     private void IsReadyToExit()
     {
-        timer += Time.deltaTime;
+        _timer += Time.deltaTime;
   
-        if(timer > timeToExit)
+        if(_timer > _timeToExit)
         {
-            timer = 0;
-            isStupid = true;
-            AudioManager.PlaySound(stupidSound);
+            _timer = 0;
+            _isStupid = true;
+            AudioManager.PlaySound(_stupidSound);
         }
     }
 
     private void GoToGoalZone()
     {
-        float step =  speed/4 * Time.deltaTime; 
-        myTransform.position = Vector3.MoveTowards(transform.position, goalZone.position, step);
+        float step =  Speed/4 * Time.deltaTime; 
+        _myTransform.position = Vector3.MoveTowards(transform.position, _goalZone.position, step);
     }
 
     private void Move()
     {
-        float step =  speed * Time.deltaTime; 
-        myTransform.position = Vector3.MoveTowards(transform.position, home.position, step);
+        float step =  Speed * Time.deltaTime; 
+        _myTransform.position = Vector3.MoveTowards(transform.position, _home.position, step);
     }
 }

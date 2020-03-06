@@ -3,42 +3,42 @@ using UnityEngine;
 
 public class Enemy : MortalEntity
 {
-    public bool hasPet = false;
+    public bool HasPet;
 
-    public GoalZone goalZone;
+    public GoalZone GoalZone;
 
-    private Move moveScript;
-    private Animator animator;
-    private static readonly int Rotate = Animator.StringToHash("Rotate");
+    private Move _moveScript;
+    private Animator _animator;
+    private static readonly int _rotate = Animator.StringToHash("Rotate");
 
     private void Start()
     {
-        moveScript = GetComponent<Move>();
-        animator = GetComponent<Animator>();
+        _moveScript = GetComponent<Move>();
+        _animator = GetComponent<Animator>();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(Tags.FreePet.ToString()) && !hasPet)
+        if (other.gameObject.CompareTag(GameObjectTag.FreePet.ToString()) && !HasPet)
         {
             Transform pet = other.transform;
             pet.SetParent(transform);
             pet.transform.localPosition = Vector2.zero;
-            pet.tag = Tags.CapturedPet.ToString();
-            pet.GetComponent<Pet>().isFree = false;
-            moveScript.ChangeTarget(goalZone.GetRandomTargetZone());
-            animator.SetTrigger(Rotate);
-            hasPet = true;
-            CountManager.Instance.Decrement(CounterTags.pets, 1); 
+            pet.tag = GameObjectTag.CapturedPet.ToString();
+            pet.GetComponent<Pet>().IsFree = false;
+            _moveScript.ChangeTarget(GoalZone.GetRandomTargetZone());
+            _animator.SetTrigger(_rotate);
+            HasPet = true;
+            CountManager.Instance.Decrement(CounterTag.Pets, 1); 
         }
 
         if (other.gameObject.GetComponent<GoalZone>() != null)
         {
             Debug.Log("OOPS!");
-            ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
+            ObjectPoolManager.Instance.ReturnToPool(PoolTag.Aliens, gameObject);
         }
 
-        if(other.gameObject.CompareTag(Tags.PetSpawner.ToString()) && CountManager.Instance.GetCounter(CounterTags.pets) == 0)
+        if(other.gameObject.CompareTag(GameObjectTag.PetSpawner.ToString()) && CountManager.Instance.GetCounter(CounterTag.Pets) == 0)
         {
             UIManager.Instance.ShowGameOverPanel();
         }
@@ -46,22 +46,22 @@ public class Enemy : MortalEntity
 
     protected override void Die()
     {
-        if (hasPet)
+        if (HasPet)
         {
             var pet = transform.GetChild(0);
             pet.SetParent(null);
             pet.GetComponent<Pet>().GoHome();
-            CountManager.Instance.Increment(CounterTags.pets, 1);
+            CountManager.Instance.Increment(CounterTag.Pets, 1);
         }
 
-        hasPet = false;
-        GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTags.EnemyLimbs);
+        HasPet = false;
+        GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTag.EnemyLimbs);
         particle.transform.position = transform.position;
         
-        CountManager.Instance.Increment(CounterTags.kills, 1);
-        CountManager.Instance.Increment(CounterTags.totalKills, 1);
-        CountManager.Instance.Increment(CounterTags.scores, 1);
+        CountManager.Instance.Increment(CounterTag.Kills, 1);
+        CountManager.Instance.Increment(CounterTag.TotalKills, 1);
+        CountManager.Instance.Increment(CounterTag.Scores, 1);
 
-        ObjectPoolManager.Instance.ReturnToPool(PoolTags.Aliens, gameObject);
+        ObjectPoolManager.Instance.ReturnToPool(PoolTag.Aliens, gameObject);
     }
 }

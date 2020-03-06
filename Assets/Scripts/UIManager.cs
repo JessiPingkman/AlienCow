@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Enums;
 
 public class UIManager : MonoBehaviour
 {
-    public List<TextCounter> counterTexts;
+    public List<TextCounter> CounterTexts;
 
     [SerializeField]
     private Text _waveText;
@@ -12,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameOverPanel;
 
-    private Dictionary<CounterTags, TextCounter> counterTextsDictionary;
+    private Dictionary<CounterTag, TextCounter> _counterTextsDictionary;
 
     public static UIManager Instance;
 
@@ -27,22 +28,22 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        counterTextsDictionary = new Dictionary<CounterTags, TextCounter>();
+        _counterTextsDictionary = new Dictionary<CounterTag, TextCounter>();
 
-        foreach(TextCounter counterText in counterTexts)
+        foreach(TextCounter counterText in CounterTexts)
         {   
-            counterTextsDictionary.Add(counterText.counterTag, counterText);
+            _counterTextsDictionary.Add(counterText.CounterTag, counterText);
         }
     }
 
-    public void UpdateCounterText(CounterTags tag, int count)
+    public void UpdateCounterText(CounterTag tag, int count)
     {
-        if(counterTextsDictionary.ContainsKey(tag) == false)
+        if(_counterTextsDictionary.ContainsKey(tag) == false)
         {
             return;
         }
 
-        counterTextsDictionary[tag].counter.text = tag.ToString()+": "+count;
+        _counterTextsDictionary[tag].Counter.text = tag.ToString()+": "+count;
     }
 
     public void UpdateWaveText(string value)
@@ -57,9 +58,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverPanel()
     {
-        foreach(TextCounter counterText in counterTexts)
+        foreach(TextCounter counterText in CounterTexts)
         {
-            counterText.counter.gameObject.SetActive(false);
+            counterText.Counter.gameObject.SetActive(false);
         }
         _waveText.gameObject.SetActive(false);
         _gameOverPanel.SetActive(true);

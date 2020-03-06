@@ -2,12 +2,12 @@
 
 public class Move : MonoBehaviour
 {
-    public float speed;
-    public Transform target;
+    public float Speed;
+    public Transform Target;
     
-    private Rigidbody2D rb;
-    private float startTime;
-    private float journeyLength;
+    private Rigidbody2D _rb;
+    private float _startTime;
+    private float _journeyLength;
 
     private void OnEnable() 
     {
@@ -21,22 +21,22 @@ public class Move : MonoBehaviour
 
     private void Initialize()
     {
-        rb = GetComponent<Rigidbody2D>();
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, target.position);
+        _rb = GetComponent<Rigidbody2D>();
+        _startTime = Time.time;
+        _journeyLength = Vector3.Distance(transform.position, Target.position);
     }
 
     private void MoveForward()
     {
-        float distCovered = (Time.time - startTime) * speed;
-        float fractionOfJourney = distCovered / journeyLength;
-        rb.position = Vector2.Lerp(transform.position, target.position, fractionOfJourney);
+        float distCovered = (Time.time - _startTime) * Speed;
+        float fractionOfJourney = distCovered / _journeyLength;
+        _rb.position = Vector2.Lerp(transform.position, Target.position, fractionOfJourney);
     }
 
     public void ChangeTarget(Transform newTarget)
     {
-        target = newTarget;
-        startTime = Time.time;
-        journeyLength = Vector3.Distance(transform.position, target.position);
+        Target = newTarget;
+        _startTime = Time.time;
+        _journeyLength = Vector3.Distance(transform.position, Target.position);
     }
 }

@@ -2,11 +2,11 @@
 
 public abstract class MortalEntity : MonoBehaviour
 {
-    public float healthPoint = 10;
+    public float HealthPoint = 10;
 
     public void CheckDeath()
     {
-        if (healthPoint <= 0)
+        if (HealthPoint <= 0)
         {
             Die();
         }

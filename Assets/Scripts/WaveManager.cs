@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
+
 public class WaveManager : MonoBehaviour
 {
     [SerializeField]
@@ -16,98 +18,98 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private bool _waveIsComplete;
 
-    private Timer textTimer;
-    private Timer waveTimer;
-    private Timer spawnTimer;
+    private Timer _textTimer;
+    private Timer _waveTimer;
+    private Timer _spawnTimer;
     private float _maxSpawnInterval;
-    private int currentWaveNumber;
-    private int spawnedObjectsCount;
+    private int _currentWaveNumber;
+    private int _spawnedObjectsCount;
 
 
     private void Awake() 
     {
-        currentWaveNumber = 1;
-        textTimer = new Timer();
-        waveTimer = new Timer();
-        spawnTimer = new Timer();
+        _currentWaveNumber = 1;
+        _textTimer = new Timer();
+        _waveTimer = new Timer();
+        _spawnTimer = new Timer();
         _maxSpawnInterval = _spawnInterval;
     }
 
     private void Start() 
     {
-        UIManager.Instance.UpdateWaveText(currentWaveNumber.ToString());
+        UIManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
         UIManager.Instance.ShowWaveText(true);
     }
 
     private void Update() 
     {
-        if(textTimer.CountTo(4))
+        if(_textTimer.CountTo(4))
         {
             UIManager.Instance.ShowWaveText(false);
-            textTimer.Restart();
+            _textTimer.Restart();
         }
 
-        if(spawnedObjectsCount < _maxCount && !_waveIsComplete)
+        if(_spawnedObjectsCount < _maxCount && !_waveIsComplete)
         {
-            if(spawnTimer.CountTo(Random.Range(_maxSpawnInterval, _spawnInterval)) == false)
+            if(_spawnTimer.CountTo(Random.Range(_spawnInterval, _maxSpawnInterval)) == false)
             {
                 return;
             }
             SpawnEnemies();
-            spawnTimer.Restart();
+            _spawnTimer.Restart();
         }
         else
         {
             if(!_waveIsComplete)
             {
-                if(CountManager.Instance.GetCounter(CounterTags.kills) < _maxCount)
+                if(CountManager.Instance.GetCounter(CounterTag.Kills) < _maxCount)
                 {
                     return;
                 }
                 
-                CompleteTheWave();
+                CompleteCurrentWave();
                 UIManager.Instance.ShowWaveText(true);
             }
 
-            if(waveTimer.CountTo(_waveInterval) == false)
+            if(_waveTimer.CountTo(_waveInterval) == false)
             {
                 return;
             }
 
             PrepareNextWave();
-            UIManager.Instance.UpdateWaveText(currentWaveNumber.ToString());
+            UIManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
             UIManager.Instance.ShowWaveText(true);
             StartNewWave();
 
-            waveTimer.Restart();
-            spawnTimer.Restart();
+            _waveTimer.Restart();
+            _spawnTimer.Restart();
         }
     }
 
     private void SpawnEnemies()
     {
-        for(int i = 0; i<_spawner.spawnCount; i++)
+        for(int i = 0; i<_spawner.SpawnCount; i++)
         {
-            _spawner.Spawn(new Vector3(_spawner.spawnPosition.position.x, Random.Range(-5.5f, -3f), _spawner.spawnPosition.position.z));
-            spawnedObjectsCount++;
+            _spawner.Spawn(new Vector3(_spawner.SpawnPosition.position.x, Random.Range(-5.5f, -3f), _spawner.SpawnPosition.position.z));
+            _spawnedObjectsCount++;
         }
     }
 
-    private void CompleteTheWave()
+    private void CompleteCurrentWave()
     {
         _waveIsComplete = true;
-        spawnedObjectsCount = 0;
+        _spawnedObjectsCount = 0;
         UIManager.Instance.UpdateWaveText("completed");
         UIManager.Instance.ShowWaveText(true);
     }
 
     private void PrepareNextWave()
     {
-        var kills = CountManager.Instance.GetCounter(CounterTags.kills);
-        CountManager.Instance.Decrement(CounterTags.kills, kills);
-        _maxCount += currentWaveNumber*3;
+        var kills = CountManager.Instance.GetCounter(CounterTag.Kills);
+        CountManager.Instance.Decrement(CounterTag.Kills, kills);
+        _maxCount += _currentWaveNumber*3;
         _spawnInterval -= 0.05f;
-        currentWaveNumber++;
+        _currentWaveNumber++;
     }
 
      private void StartNewWave()

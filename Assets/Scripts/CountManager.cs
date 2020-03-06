@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Enums;
 
 
 public class CountManager : MonoBehaviour
@@ -8,9 +9,9 @@ public class CountManager : MonoBehaviour
     public static CountManager Instance;
 
     [SerializeField]
-    private List<Counter> counters;
+    private List<Counter> _counters;
 
-    private Dictionary<CounterTags, Counter> countersDictionary;
+    private Dictionary<CounterTag, Counter> _countersDictionary;
 
     private void Start()
     {
@@ -23,40 +24,45 @@ public class CountManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        countersDictionary = new Dictionary<CounterTags, Counter>();
+        _countersDictionary = new Dictionary<CounterTag, Counter>();
 
-        foreach(Counter counter in counters)
+        foreach(Counter counter in _counters)
         {
-            countersDictionary.Add(counter.counterTag, counter);
+            _countersDictionary.Add(counter.CounterTag, counter);
         }
 
-        UIManager.Instance.UpdateCounterText(CounterTags.pets, countersDictionary[CounterTags.pets].counter);
+        UIManager.Instance.UpdateCounterText(CounterTag.Pets, _countersDictionary[CounterTag.Pets].Counter);
     }
     
     
-    public void Increment(CounterTags tag, int value)
+    public void Increment(CounterTag tag, int value)
     {
-        if(countersDictionary.ContainsKey(tag) == false)
+        if(_countersDictionary.ContainsKey(tag) == false)
         {
             return;
         }
 
-        var incrementedValue = countersDictionary[tag].counter += value;
+        var incrementedValue = _countersDictionary[tag].Counter += value;
         UIManager.Instance.UpdateCounterText(tag, incrementedValue);
     }
 
-    public void Decrement(CounterTags tag, int value)
+    public void Decrement(CounterTag tag, int value)
     {
-        if(countersDictionary.ContainsKey(tag) == false)
+        if(_countersDictionary.ContainsKey(tag) == false)
         {
             return;
         }
-        var decrementedValue = countersDictionary[tag].counter -= value;
+        var decrementedValue = _countersDictionary[tag].Counter -= value;
         UIManager.Instance.UpdateCounterText(tag, decrementedValue);
     }
 
-    public int GetCounter(CounterTags tag)
+    public int GetCounter(CounterTag tag)
     {
-        return countersDictionary[tag].counter;
+        if(_countersDictionary.ContainsKey(tag) == false)
+        {
+            return 0;
+        }
+        
+        return _countersDictionary[tag].Counter;
     }
 }

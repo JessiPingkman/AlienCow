@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
@@ -9,16 +10,15 @@ public class ObjectPoolManager : MonoBehaviour
     [Serializable]
     internal struct PoolModel
     {
-        public PoolTags tag;
-        public GameObject prefab;
-        public int size;
+        public PoolTag Tag;
+        public GameObject Prefab;
+        public int Size;
     }
 
-
     [SerializeField]
-    private List<PoolModel> poolModels;
+    private List<PoolModel> _poolModels;
 
-    private Dictionary<PoolTags, Queue<GameObject>> poolsDictionary;
+    private Dictionary<PoolTag, Queue<GameObject>> _poolsDictionary;
     
     void Awake()
     {
@@ -31,51 +31,52 @@ public class ObjectPoolManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        poolsDictionary = new Dictionary<PoolTags, Queue<GameObject>>();
+        _poolsDictionary = new Dictionary<PoolTag, Queue<GameObject>>();
         
-        InitializePoolsDictionary(poolsDictionary);
+        InitializePoolsDictionary(_poolsDictionary);
     }
 
-    private void InitializePoolsDictionary(Dictionary<PoolTags, Queue<GameObject>> InitializableDictionary)
+    private void InitializePoolsDictionary(Dictionary<PoolTag, Queue<GameObject>> InitializableDictionary)
     {
-        foreach(PoolModel poolModel in poolModels)
+        foreach(PoolModel poolModel in _poolModels)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i = 0; i<poolModel.size; i++)
+            for(int i = 0; i<poolModel.Size; i++)
             {
-                GameObject poolObject = Instantiate(poolModel.prefab, transform);
+                GameObject poolObject = Instantiate(poolModel.Prefab, transform);
                 poolObject.SetActive(false);
                 objectPool.Enqueue(poolObject);
             }
 
-            InitializableDictionary.Add(poolModel.tag, objectPool);
+            InitializableDictionary.Add(poolModel.Tag, objectPool);
         }
     }
-
-    public GameObject GetFromPool(PoolTags tag)
+     
+     
+    public GameObject GetFromPool(PoolTag tag)
     {
-        if(poolsDictionary[tag] == null)
+        if(_poolsDictionary[tag] == null)
         {
             throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         }
-        GameObject objectFromPool = poolsDictionary[tag].Dequeue();
+        GameObject objectFromPool = _poolsDictionary[tag].Dequeue();
         objectFromPool.SetActive(true);
         return objectFromPool;
     }
 
-    public void ReturnToPool(PoolTags tag, GameObject objectToReturn)
+    public void ReturnToPool(PoolTag tag, GameObject objectToReturn)
     {
-        if(poolsDictionary[tag] == null)
+        if(_poolsDictionary[tag] == null)
         {
             throw new NullReferenceException("This tag doesn't exist in PoolsDictionary");
         }
         
         objectToReturn.SetActive(false);
-        poolsDictionary[tag].Enqueue(objectToReturn);
+        _poolsDictionary[tag].Enqueue(objectToReturn);
     }
 
-    public int GetPoolCount(PoolTags tag){
-        return poolsDictionary[tag].Count;
+    public int GetPoolCount(PoolTag tag){
+        return _poolsDictionary[tag].Count;
     }
 }

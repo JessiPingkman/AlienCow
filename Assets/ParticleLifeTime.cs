@@ -1,21 +1,22 @@
-﻿using UnityEngine;
+﻿using Enums;
+using UnityEngine;
 
 public class ParticleLifeTime : MonoBehaviour
 {
-    private ParticleSystem particle;
+    private ParticleSystem _particle;
     
     void Awake()
     {
-        particle = GetComponent<ParticleSystem>();
+        _particle = GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if(particle != null)
+        if(_particle != null)
         {
-            if(!particle.IsAlive())
+            if(!_particle.IsAlive())
             {
-                ObjectPoolManager.Instance.ReturnToPool(PoolTags.EnemyLimbs, gameObject);
+                ObjectPoolManager.Instance.ReturnToPool(PoolTag.EnemyLimbs, gameObject);
             }
         }
     }
