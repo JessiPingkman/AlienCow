@@ -1,5 +1,7 @@
-﻿public abstract class BaseCounter <T>
+﻿using Enums;
+
+public abstract class BaseCounter <T>
 {
-    public CounterTags counterTag;
-    public T counter;
+    public CounterTag CounterTag;
+    public T Counter;
 }

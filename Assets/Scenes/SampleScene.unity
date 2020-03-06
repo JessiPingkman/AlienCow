@@ -1052,10 +1052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864f2ec83711b2046935bb2aa5bd3641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 3
-  poolTag: 1
-  objectParent: {fileID: 806611358}
-  spawnPosition: {fileID: 806611358}
+  SpawnCount: 3
+  PoolTag: 0
+  ObjectParent: {fileID: 806611358}
+  SpawnPosition: {fileID: 806611358}
 --- !u!4 &806611358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5623093983139591763, guid: 0b6f5ce51f7fab1418a1763d7fdf9ec3,
@@ -1328,6 +1328,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 806611358}
+    - target: {fileID: 540041997157323213, guid: 015e2e891754c456c9add749b5cef8ae,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 806611358}
+    - target: {fileID: 540041997157323213, guid: 015e2e891754c456c9add749b5cef8ae,
+        type: 3}
+      propertyPath: Speed
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1950372959118299252, guid: 015e2e891754c456c9add749b5cef8ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1386,6 +1396,11 @@ PrefabInstance:
     - target: {fileID: 2097839002779428445, guid: 015e2e891754c456c9add749b5cef8ae,
         type: 3}
       propertyPath: goalZone
+      value: 
+      objectReference: {fileID: 1925142801}
+    - target: {fileID: 2097839002779428445, guid: 015e2e891754c456c9add749b5cef8ae,
+        type: 3}
+      propertyPath: GoalZone
       value: 
       objectReference: {fileID: 1925142801}
     - target: {fileID: 2730584117454806784, guid: 015e2e891754c456c9add749b5cef8ae,
@@ -1904,13 +1919,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72084580abcc6c04e831b85772d339e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterTexts:
-  - counterTag: 3
-    counter: {fileID: 240002731}
-  - counterTag: 2
-    counter: {fileID: 1284598774}
-  - counterTag: 0
-    counter: {fileID: 1052615728}
+  CounterTexts:
+  - CounterTag: 2
+    Counter: {fileID: 1284598774}
+  - CounterTag: 0
+    Counter: {fileID: 1052615728}
+  - CounterTag: 3
+    Counter: {fileID: 240002731}
   _waveText: {fileID: 1783489811}
   _gameOverPanel: {fileID: 1939126683}
 --- !u!4 &1483217749
@@ -1956,21 +1971,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16160d3a0d0b204b87a5a3d0f77a829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolModels:
-  - tag: 0
-    prefab: {fileID: 1038567537}
-    size: 100
-  - tag: 1
-    prefab: {fileID: 5564056086210707275, guid: e9d1c65685397354782aa9a1d757d55c,
+  _poolModels:
+  - Tag: 0
+    Prefab: {fileID: 1038567537}
+    Size: 100
+  - Tag: 1
+    Prefab: {fileID: 5564056086210707275, guid: e9d1c65685397354782aa9a1d757d55c,
       type: 3}
-    size: 3
-  - tag: 2
-    prefab: {fileID: 702192669826413242, guid: 3843624f850c6d34ead82163bd0688b9, type: 3}
-    size: 10
-  - tag: 3
-    prefab: {fileID: 4692519785264403103, guid: 7e6bc8b1bacb446e39d71ff32430a0f3,
+    Size: 3
+  - Tag: 2
+    Prefab: {fileID: 702192669826413242, guid: 3843624f850c6d34ead82163bd0688b9, type: 3}
+    Size: 50
+  - Tag: 3
+    Prefab: {fileID: 4692519785264403103, guid: 7e6bc8b1bacb446e39d71ff32430a0f3,
       type: 3}
-    size: 10
+    Size: 50
 --- !u!4 &1496444223
 Transform:
   m_ObjectHideFlags: 0
@@ -2431,8 +2446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71ff643e25434db98611186f028053e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnerScript: {fileID: 0}
-  petAoumtText: {fileID: 240002731}
+  SpawnerScript: {fileID: 0}
+  PetAmountText: {fileID: 0}
 --- !u!61 &1925142802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2611,15 +2626,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31798d8850fe0246a8d34f5099a6a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counters:
-  - counterTag: 3
-    counter: 3
-  - counterTag: 2
-    counter: 0
-  - counterTag: 0
-    counter: 0
-  - counterTag: 1
-    counter: 0
+  _counters:
+  - CounterTag: 2
+    Counter: 0
+  - CounterTag: 0
+    Counter: 0
+  - CounterTag: 3
+    Counter: 3
 --- !u!1 &2025009409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2800,10 +2813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e025ab8f0085f08459c1e6fee7b9b88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 1
-  poolTag: 0
-  objectParent: {fileID: 4900745921454501926}
-  spawnPosition: {fileID: 4900745921454501926}
+  SpawnCount: 1
+  PoolTag: 0
+  ObjectParent: {fileID: 4900745921454501926}
+  SpawnPosition: {fileID: 4900745921454501926}
 --- !u!1001 &6217030289670634967
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2815,6 +2828,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Rick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[0]
+      value: Allah Akbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[1]
+      value: Aww crap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[2]
+      value: 'Burn out the CPU '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[3]
+      value: Haha yeah_sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[4]
+      value: Lick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[5]
+      value: Number One is me
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[6]
+      value: Screw this, I'm out
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[7]
+      value: Uh oh
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217030288377082847, guid: b58a07dac79657e45be424bb8df2e14f,
+        type: 3}
+      propertyPath: Sounds.Array.data[8]
+      value: WabuLabuDubDub
       objectReference: {fileID: 0}
     - target: {fileID: 7618850088124742543, guid: b58a07dac79657e45be424bb8df2e14f,
         type: 3}
@@ -2945,5 +3008,10 @@ PrefabInstance:
       propertyPath: _spawner
       value: 
       objectReference: {fileID: 4900745921454501927}
+    - target: {fileID: 9066137252439581015, guid: 27332980efac98742b6ca0a97277a39b,
+        type: 3}
+      propertyPath: _spawnInterval
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27332980efac98742b6ca0a97277a39b, type: 3}

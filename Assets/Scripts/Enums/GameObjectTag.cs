@@ -1,6 +1,6 @@
 ﻿namespace Enums
 {
-    public enum Tags 
+    public enum GameObjectTag 
     {
         FreePet,
         CapturedPet,

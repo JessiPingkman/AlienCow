@@ -1,9 +1,9 @@
 ﻿public class PetSpawner : Spawner
 {
     private void Start() {
-        for(int i = 0; i<spawnCount; i++)
+        for(int i = 0; i<SpawnCount; i++)
         {
-            Spawn(spawnPosition.position);
+            Spawn(SpawnPosition.position);
         }
     }
 }

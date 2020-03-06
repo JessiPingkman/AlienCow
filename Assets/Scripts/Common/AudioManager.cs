@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private static AudioSource Audio;
-    private static Dictionary<string, AudioClip> Sounds;
+    private static AudioSource _audio;
+    private static Dictionary<string, AudioClip> _sounds;
 
     private void Awake()
     {
-        Sounds = new Dictionary<string, AudioClip>();
+        _sounds = new Dictionary<string, AudioClip>();
 
-        Audio = GetComponent<AudioSource>();
+        _audio = GetComponent<AudioSource>();
         var soundsList = Resources.LoadAll<AudioClip>("Sounds");
         foreach(var sound in soundsList)
         {
-            Sounds.Add(sound.name, sound);
+            _sounds.Add(sound.name, sound);
         }
     }
 
     public static void PlaySound(string name)
     {
-        Audio.PlayOneShot(Sounds[name]);
+        _audio.PlayOneShot(_sounds[name]);
     }
 }
