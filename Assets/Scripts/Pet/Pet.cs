@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Common;
+using Enums;
 using UnityEngine;
 
 public class Pet : MonoBehaviour
@@ -36,24 +37,6 @@ public class Pet : MonoBehaviour
         _myTransform.tag = GameObjectTag.FreePet.ToString();
         IsFree = true;
         AudioManager.PlaySound(Sounds[UnityEngine.Random.Range(0,Sounds.Length-1)]);
-    }
-
-    private void IsReadyToExit()
-    {
-        _timer += Time.deltaTime;
-  
-        if(_timer > _timeToExit)
-        {
-            _timer = 0;
-            _isStupid = true;
-            AudioManager.PlaySound(_stupidSound);
-        }
-    }
-
-    private void GoToGoalZone()
-    {
-        float step =  Speed/4 * Time.deltaTime; 
-        _myTransform.position = Vector3.MoveTowards(transform.position, _goalZone.position, step);
     }
 
     private void Move()

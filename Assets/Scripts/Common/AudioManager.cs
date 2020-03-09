@@ -1,25 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+namespace Common
 {
-    private static AudioSource _audio;
-    private static Dictionary<string, AudioClip> _sounds;
-
-    private void Awake()
+    public class AudioManager : MonoBehaviour
     {
-        _sounds = new Dictionary<string, AudioClip>();
+        private static AudioSource _audio;
+        private static Dictionary<string, AudioClip> _sounds;
 
-        _audio = GetComponent<AudioSource>();
-        var soundsList = Resources.LoadAll<AudioClip>("Sounds");
-        foreach(var sound in soundsList)
+        private void Awake()
         {
-            _sounds.Add(sound.name, sound);
-        }
-    }
+            _sounds = new Dictionary<string, AudioClip>();
 
-    public static void PlaySound(string name)
-    {
-        _audio.PlayOneShot(_sounds[name]);
+            _audio = GetComponent<AudioSource>();
+            AudioClip[] soundsList = Resources.LoadAll<AudioClip>("Sounds");
+            foreach(AudioClip sound in soundsList)
+            {
+                _sounds.Add(sound.name, sound);
+            }
+        }
+
+        public static void PlaySound(string name)
+        {
+            _audio.PlayOneShot(_sounds[name]);
+        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class SoundEvent : MonoBehaviour
+namespace Common
 {
-    public void CallSound(string soundName)
+    public class SoundEvent : MonoBehaviour
     {
-        AudioManager.PlaySound(soundName);
+        public void PlaySoundByName(string soundName)
+        {
+            AudioManager.PlaySound(soundName);
+        }
     }
 }

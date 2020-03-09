@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Common;
+using Enums;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -36,10 +37,7 @@ public class Player : MonoBehaviour
                     entity.HealthPoint -= _damage;
                     entity.CheckDeath();
 
-                    if (CountManager.Instance.GetCounter(CounterTag.TotalKills)%5==0)
-                    {
-                        AudioManager.PlaySound(Sounds[Random.Range(0,Sounds.Length)]);
-                    }
+                    SaySomethingFunny();
                 }
             }
             CreateExplosion(_myCamera.ScreenToWorldPoint(mousePos));
@@ -55,5 +53,13 @@ public class Player : MonoBehaviour
     private void Die ()
     {
         Destroy (gameObject);
+    }
+
+    private void SaySomethingFunny()
+    {
+        if (CountManager.Instance.GetCounter(CounterTag.TotalKills) % 5 == 0)
+        {
+            AudioManager.PlaySound(Sounds[Random.Range(0,Sounds.Length)]);
+        }
     }
 }
