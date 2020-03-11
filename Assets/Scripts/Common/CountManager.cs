@@ -33,8 +33,7 @@ public class CountManager : MonoBehaviour
 
         UIManager.Instance.UpdateCounterText(CounterTag.Pets, _countersDictionary[CounterTag.Pets].Counter);
     }
-    
-    
+
     public void Increment(CounterTag tag, int value)
     {
         if(_countersDictionary.ContainsKey(tag) == false)

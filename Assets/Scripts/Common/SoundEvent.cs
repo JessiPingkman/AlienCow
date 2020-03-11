@@ -6,7 +6,7 @@ namespace Common
     {
         public void PlaySoundByName(string soundName)
         {
-            AudioManager.PlaySound(soundName);
+            AudioManager.Instance.PlaySound(soundName);
         }
     }
 }

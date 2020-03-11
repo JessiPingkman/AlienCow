@@ -36,7 +36,7 @@ public class Pet : MonoBehaviour
     {
         _myTransform.tag = GameObjectTag.FreePet.ToString();
         IsFree = true;
-        AudioManager.PlaySound(Sounds[UnityEngine.Random.Range(0,Sounds.Length-1)]);
+        AudioManager.Instance.PlaySound(Sounds[UnityEngine.Random.Range(0,Sounds.Length-1)]);
     }
 
     private void Move()
