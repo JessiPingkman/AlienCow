@@ -8,9 +8,6 @@ public class Player : MonoBehaviour
     private float _damage;
     
     private Camera _myCamera;
-    private SoundEvent _soundEvent;
-    
-    public string[] Sounds;
 
     private void Awake()
     {
@@ -59,7 +56,7 @@ public class Player : MonoBehaviour
     {
         if (CountManager.Instance.GetCounter(CounterTag.TotalKills) % 5 == 0)
         {
-            AudioManager.Instance.PlaySound(Sounds[Random.Range(0,Sounds.Length)]);
+            AudioManager.Instance.PlayRandomSoundByTag(AudioTag.Rick);
         }
     }
 }

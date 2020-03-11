@@ -6,7 +6,6 @@ public class Pet : MonoBehaviour
 {
     public float Speed = 10;
     public bool IsFree = false;
-    public string[] Sounds;
     
     private Transform _home;
     private Transform _goalZone;
@@ -14,7 +13,6 @@ public class Pet : MonoBehaviour
     private int _timeToExit;
     private bool _isStupid = false;
     private Transform _myTransform;
-    private string _stupidSound = "A chicken would say_sound";
 
     private void Start()
     {
@@ -36,7 +34,7 @@ public class Pet : MonoBehaviour
     {
         _myTransform.tag = GameObjectTag.FreePet.ToString();
         IsFree = true;
-        AudioManager.Instance.PlaySound(Sounds[UnityEngine.Random.Range(0,Sounds.Length-1)]);
+        AudioManager.Instance.PlayRandomSoundByTag(AudioTag.Morty);
     }
 
     private void Move()
