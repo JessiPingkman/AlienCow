@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Common;
+using Enums;
 using UnityEngine;
 
 public class Enemy : MortalEntity
@@ -38,9 +39,9 @@ public class Enemy : MortalEntity
             ObjectPoolManager.Instance.ReturnToPool(PoolTag.Aliens, gameObject);
         }
 
-        if(other.gameObject.CompareTag(GameObjectTag.PetSpawner.ToString()) && CountManager.Instance.GetCounter(CounterTag.Pets) == 0)
+        if (other.gameObject.CompareTag(GameObjectTag.PetSpawner.ToString()) && CountManager.Instance.GetCapacity(CounterTag.Pets) == 0)
         {
-            UIManager.Instance.ShowGameOverPanel();
+            UiManager.Instance.ShowGameOverPanel();
         }
     }
 

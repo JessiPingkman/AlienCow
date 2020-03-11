@@ -1,68 +1,70 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Enums;
+using UnityEngine;
 
-
-public class CountManager : MonoBehaviour
+namespace Common
 {
-    public static CountManager Instance;
-
-    [SerializeField]
-    private List<Counter> _counters;
-
-    private Dictionary<CounterTag, Counter> _countersDictionary;
-
-    private void Start()
+    public class CountManager : MonoBehaviour
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else if(Instance != this)
-        {
-            Destroy(gameObject);
-        }
+        public static CountManager Instance;
 
-        _countersDictionary = new Dictionary<CounterTag, Counter>();
+        private Dictionary<CounterTag, int> _countersDictionary;
 
-        foreach(Counter counter in _counters)
+        private void Awake()
         {
-            _countersDictionary.Add(counter.CounterTag, counter);
+            InitializeInstance();
+            InitializeDictionary();
         }
 
-        UIManager.Instance.UpdateCounterText(CounterTag.Pets, _countersDictionary[CounterTag.Pets].Counter);
-    }
-    
-    
-    public void Increment(CounterTag tag, int value)
-    {
-        if(_countersDictionary.ContainsKey(tag) == false)
+        private void InitializeInstance()
         {
-            return;
-        }
-
-        var incrementedValue = _countersDictionary[tag].Counter += value;
-        UIManager.Instance.UpdateCounterText(tag, incrementedValue);
-    }
-
-    public void Decrement(CounterTag tag, int value)
-    {
-        if(_countersDictionary.ContainsKey(tag) == false)
-        {
-            return;
-        }
-        var decrementedValue = _countersDictionary[tag].Counter -= value;
-        UIManager.Instance.UpdateCounterText(tag, decrementedValue);
-    }
-
-    public int GetCounter(CounterTag tag)
-    {
-        if(_countersDictionary.ContainsKey(tag) == false)
-        {
-            return 0;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
         
-        return _countersDictionary[tag].Counter;
+        public void Increment(CounterTag counterTag, int value)
+        {
+            ChangeCounterValue(counterTag, value);
+        }
+
+        public void Decrement(CounterTag counterTag, int value)
+        {
+            ChangeCounterValue(counterTag, value * -1);
+        }
+
+        private void ChangeCounterValue(CounterTag counterTag, int value)
+        {
+            if(_countersDictionary.ContainsKey(counterTag) == false)
+            {
+                return;
+            }
+        
+            int changedValue = _countersDictionary[counterTag] += value;
+            UiManager.Instance.UpdateCounterText(counterTag, changedValue);
+        }
+
+        public int GetCapacity(CounterTag counterTag)
+        {
+            return _countersDictionary.ContainsKey(counterTag) == false ? 0 : _countersDictionary[counterTag];
+        }
+
+        private void InitializeDictionary()
+        {
+            _countersDictionary = new Dictionary<CounterTag, int>();
+            
+            var counterTags = Enum.GetValues(typeof(CounterTag)).Cast<CounterTag>();
+            foreach (var counter in counterTags)
+            {
+                _countersDictionary.Add(counter, 0);
+            }
+        }
     }
 }

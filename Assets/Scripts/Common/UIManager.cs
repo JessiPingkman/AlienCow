@@ -1,68 +1,67 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Enums;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+namespace Common
 {
-    public List<TextCounter> CounterTexts;
-
-    [SerializeField]
-    private Text _waveText;
-
-    [SerializeField]
-    private GameObject _gameOverPanel;
-
-    private Dictionary<CounterTag, TextCounter> _counterTextsDictionary;
-
-    public static UIManager Instance;
-
-    private void Awake()
+    public class UiManager : MonoBehaviour
     {
-        if(Instance == null)
+        public static UiManager Instance;
+    
+        public List<TextCounter> CounterTexts;
+
+        [SerializeField]
+        private Text _waveText;
+        [SerializeField]
+        private GameObject _gameOverPanel;
+
+        private void Awake()
         {
-            Instance = this;
+            InitializeInstance();
         }
-        else if(Instance != null)
+    
+        private void InitializeInstance()
         {
-            Destroy(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        _counterTextsDictionary = new Dictionary<CounterTag, TextCounter>();
-
-        foreach(TextCounter counterText in CounterTexts)
-        {   
-            _counterTextsDictionary.Add(counterText.CounterTag, counterText);
-        }
-    }
-
-    public void UpdateCounterText(CounterTag tag, int count)
-    {
-        if(_counterTextsDictionary.ContainsKey(tag) == false)
+        public void UpdateCounterText(CounterTag counterTag, int count)
         {
-            return;
+            IEnumerable<TextCounter> counterTexts = CounterTexts.Where(counterText => counterText.CounterTag == counterTag);
+            foreach (var counterText in counterTexts)
+            {
+                counterText.Counter.text = tag + ": " + count;
+            }
         }
 
-        _counterTextsDictionary[tag].Counter.text = tag.ToString()+": "+count;
-    }
-
-    public void UpdateWaveText(string value)
-    {
-        _waveText.text = "Wave "+value;
-    }
-
-    public void ShowWaveText(bool visible)
-    {
-        _waveText.gameObject.SetActive(visible);
-    }
-
-    public void ShowGameOverPanel()
-    {
-        foreach(TextCounter counterText in CounterTexts)
+        public void UpdateWaveText(string value)
         {
-            counterText.Counter.gameObject.SetActive(false);
+            _waveText.text = "Wave " + value;
         }
-        _waveText.gameObject.SetActive(false);
-        _gameOverPanel.SetActive(true);
+
+        public void ShowWaveText(bool isVisible)
+        {
+            _waveText.gameObject.SetActive(isVisible);
+        }
+
+        public void ShowGameOverPanel()
+        {
+            foreach (TextCounter counterText in CounterTexts)
+            {
+                counterText.Counter.gameObject.SetActive(false);
+            }
+
+            ShowWaveText(false);
+            _gameOverPanel.SetActive(true);
+        }
     }
 }

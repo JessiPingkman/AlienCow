@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Common;
+using Enums;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -37,15 +38,15 @@ public class WaveManager : MonoBehaviour
 
     private void Start() 
     {
-        UIManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
-        UIManager.Instance.ShowWaveText(true);
+        UiManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
+        UiManager.Instance.ShowWaveText(true);
     }
 
     private void Update() 
     {
         if(_textTimer.CountTo(4))
         {
-            UIManager.Instance.ShowWaveText(false);
+            UiManager.Instance.ShowWaveText(false);
             _textTimer.Restart();
         }
 
@@ -62,13 +63,13 @@ public class WaveManager : MonoBehaviour
         {
             if(!_waveIsComplete)
             {
-                if(CountManager.Instance.GetCounter(CounterTag.Kills) < _maxCount)
+                if(CountManager.Instance.GetCapacity(CounterTag.Kills) < _maxCount)
                 {
                     return;
                 }
                 
                 CompleteCurrentWave();
-                UIManager.Instance.ShowWaveText(true);
+                UiManager.Instance.ShowWaveText(true);
             }
 
             if(_waveTimer.CountTo(_waveInterval) == false)
@@ -77,8 +78,8 @@ public class WaveManager : MonoBehaviour
             }
 
             PrepareNextWave();
-            UIManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
-            UIManager.Instance.ShowWaveText(true);
+            UiManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
+            UiManager.Instance.ShowWaveText(true);
             StartNewWave();
 
             _waveTimer.Restart();
@@ -99,13 +100,13 @@ public class WaveManager : MonoBehaviour
     {
         _waveIsComplete = true;
         _spawnedObjectsCount = 0;
-        UIManager.Instance.UpdateWaveText("completed");
-        UIManager.Instance.ShowWaveText(true);
+        UiManager.Instance.UpdateWaveText("completed");
+        UiManager.Instance.ShowWaveText(true);
     }
 
     private void PrepareNextWave()
     {
-        var kills = CountManager.Instance.GetCounter(CounterTag.Kills);
+        var kills = CountManager.Instance.GetCapacity(CounterTag.Kills);
         CountManager.Instance.Decrement(CounterTag.Kills, kills);
         _maxCount += _currentWaveNumber*3;
         _spawnInterval -= 0.05f;

@@ -121,8 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bad14dab05ed4f3da4919496ca0c8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  isFree: 0
-  sounds:
-  - The Hell was that_sound
-  - Oh GEEZ_sound
+  Speed: 10
+  IsFree: 0
+  Sounds: []
