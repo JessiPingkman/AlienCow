@@ -1,5 +1,6 @@
 ﻿using Common;
 using Enums;
+using UI;
 using UnityEngine;
 
 public class Enemy : MortalEntity
@@ -30,7 +31,7 @@ public class Enemy : MortalEntity
             _moveScript.ChangeTarget(GoalZone.GetRandomTargetZone());
             _animator.SetTrigger(_rotate);
             HasPet = true;
-            CountManager.Instance.Decrement(CounterTag.Pets, 1); 
+            CountManager.Instance.Decrement(CounterTag.Pets); 
         }
 
         if (other.gameObject.GetComponent<GoalZone>() != null)
@@ -52,16 +53,16 @@ public class Enemy : MortalEntity
             var pet = transform.GetChild(0);
             pet.SetParent(null);
             pet.GetComponent<Pet>().GoHome();
-            CountManager.Instance.Increment(CounterTag.Pets, 1);
+            CountManager.Instance.Increment(CounterTag.Pets);
         }
 
         HasPet = false;
         GameObject particle = ObjectPoolManager.Instance.GetFromPool(PoolTag.EnemyLimbs);
         particle.transform.position = transform.position;
         
-        CountManager.Instance.Increment(CounterTag.Kills, 1);
-        CountManager.Instance.Increment(CounterTag.TotalKills, 1);
-        CountManager.Instance.Increment(CounterTag.Scores, 1);
+        CountManager.Instance.Increment(CounterTag.Kills);
+        CountManager.Instance.Increment(CounterTag.TotalKills);
+        CountManager.Instance.Increment(CounterTag.Scores);
 
         ObjectPoolManager.Instance.ReturnToPool(PoolTag.Aliens, gameObject);
     }

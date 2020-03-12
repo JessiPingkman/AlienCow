@@ -1,13 +1,14 @@
 ﻿using System;
 using Enums;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Common
 {
     [Serializable]
-    public class TextCounter
+    public struct TextCounter
     {
-        public CounterTag CounterTag;
-        public Text Counter;
+        public CounterTag Tag;
+        public Text Text;
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common;
 using Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Common
+namespace UI
 {
     public class UiManager : MonoBehaviour
     {
@@ -36,10 +37,10 @@ namespace Common
 
         public void UpdateCounterText(CounterTag counterTag, int count)
         {
-            IEnumerable<TextCounter> counterTexts = CounterTexts.Where(counterText => counterText.CounterTag == counterTag);
+            IEnumerable<TextCounter> counterTexts = CounterTexts.Where(counterText => counterText.Tag == counterTag);
             foreach (var counterText in counterTexts)
             {
-                counterText.Counter.text = tag + ": " + count;
+                counterText.Text.text = tag + ": " + count;
             }
         }
 
@@ -48,20 +49,29 @@ namespace Common
             _waveText.text = "Wave " + value;
         }
 
-        public void ShowWaveText(bool isVisible)
+        public void ShowWaveText()
         {
-            _waveText.gameObject.SetActive(isVisible);
+            _waveText.gameObject.SetActive(true);
+        }
+
+        public void HideWaveText()
+        {
+            _waveText.gameObject.SetActive(false);
         }
 
         public void ShowGameOverPanel()
         {
+            HideAllCounterText();
+            HideWaveText();
+            _gameOverPanel.SetActive(true);
+        }
+
+        private void HideAllCounterText()
+        {
             foreach (TextCounter counterText in CounterTexts)
             {
-                counterText.Counter.gameObject.SetActive(false);
+                counterText.Text.gameObject.SetActive(false);
             }
-
-            ShowWaveText(false);
-            _gameOverPanel.SetActive(true);
         }
     }
 }

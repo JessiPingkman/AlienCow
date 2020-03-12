@@ -1912,12 +1912,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CounterTexts:
-  - CounterTag: 0
-    Counter: {fileID: 1052615728}
-  - CounterTag: 2
-    Counter: {fileID: 1284598774}
-  - CounterTag: 3
-    Counter: {fileID: 240002731}
+  - Tag: 0
+    Text: {fileID: 1052615728}
+  - Tag: 2
+    Text: {fileID: 1284598774}
+  - Tag: 3
+    Text: {fileID: 240002731}
   _waveText: {fileID: 1783489811}
   _gameOverPanel: {fileID: 1939126683}
 --- !u!4 &1483217749

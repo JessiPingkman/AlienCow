@@ -1,5 +1,6 @@
 ﻿using Common;
 using Enums;
+using UI;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -25,8 +26,8 @@ public class WaveManager : MonoBehaviour
     private float _maxSpawnInterval;
     private int _currentWaveNumber;
     private int _spawnedObjectsCount;
-
-
+    private UiManager _uiManager;
+    
     private void Awake() 
     {
         _currentWaveNumber = 1;
@@ -34,19 +35,20 @@ public class WaveManager : MonoBehaviour
         _waveTimer = new Timer();
         _spawnTimer = new Timer();
         _maxSpawnInterval = _spawnInterval;
+        _uiManager = UiManager.Instance;
     }
 
     private void Start() 
     {
-        UiManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
-        UiManager.Instance.ShowWaveText(true);
+        _uiManager.UpdateWaveText(_currentWaveNumber.ToString());
+        _uiManager.ShowWaveText();
     }
 
     private void Update() 
     {
         if(_textTimer.CountTo(4))
         {
-            UiManager.Instance.ShowWaveText(false);
+            _uiManager.HideWaveText();
             _textTimer.Restart();
         }
 
@@ -69,7 +71,7 @@ public class WaveManager : MonoBehaviour
                 }
                 
                 CompleteCurrentWave();
-                UiManager.Instance.ShowWaveText(true);
+                _uiManager.ShowWaveText();
             }
 
             if(_waveTimer.CountTo(_waveInterval) == false)
@@ -78,8 +80,8 @@ public class WaveManager : MonoBehaviour
             }
 
             PrepareNextWave();
-            UiManager.Instance.UpdateWaveText(_currentWaveNumber.ToString());
-            UiManager.Instance.ShowWaveText(true);
+            _uiManager.UpdateWaveText(_currentWaveNumber.ToString());
+            _uiManager.ShowWaveText();
             StartNewWave();
 
             _waveTimer.Restart();
@@ -100,8 +102,8 @@ public class WaveManager : MonoBehaviour
     {
         _waveIsComplete = true;
         _spawnedObjectsCount = 0;
-        UiManager.Instance.UpdateWaveText("completed");
-        UiManager.Instance.ShowWaveText(true);
+        _uiManager.UpdateWaveText("completed");
+        _uiManager.ShowWaveText();
     }
 
     private void PrepareNextWave()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
+using UI;
 using UnityEngine;
 
 namespace Common
@@ -30,12 +31,12 @@ namespace Common
             }
         }
         
-        public void Increment(CounterTag counterTag, int value)
+        public void Increment(CounterTag counterTag, int value = 1)
         {
             ChangeCounterValue(counterTag, value);
         }
 
-        public void Decrement(CounterTag counterTag, int value)
+        public void Decrement(CounterTag counterTag, int value = 1)
         {
             ChangeCounterValue(counterTag, value * -1);
         }
