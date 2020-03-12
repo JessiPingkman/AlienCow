@@ -32,7 +32,6 @@ namespace Alien
             if (enemy != null && enemy.HostageIsTaken)
             {
                 Destroy(other.gameObject);
-                CountManager.Instance.Decrement(CounterTag.Pets, 1);
             }
         }
     }

@@ -43,6 +43,7 @@ namespace Pets
             transform.SetParent(null);
             IsFree = true;
             AudioManager.PlaySound(Sounds[Random.Range(0,Sounds.Length)]);
+            CountManager.Instance.Increment(CounterTag.Pets, 1);
         }
     
         public void BecomeHostage(Transform enemy)
@@ -51,6 +52,7 @@ namespace Pets
             transform.localPosition = Vector2.zero;
             IsFree = false;
             IsNotInPetZone = true;
+            CountManager.Instance.Decrement(CounterTag.Pets, 1);
         }
     }
 }
