@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1950372959118299252}
   - component: {fileID: 2730584117454806784}
   - component: {fileID: 540041997157323213}
-  - component: {fileID: 2097839002779428445}
   - component: {fileID: 5306162894717399736}
   - component: {fileID: 2097839002779428444}
   - component: {fileID: 2097839002779428434}
+  - component: {fileID: 9115785526672412136}
   m_Layer: 8
   m_Name: Alien
   m_TagString: Untagged
@@ -99,23 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93d676e08ef8416487554e751456f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.04
-  target: {fileID: 0}
---- !u!114 &2097839002779428445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8707423932814148771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58607bfb5fc8c466bb44a03d339292f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoint: 10
-  hasPet: 0
-  goalZone: {fileID: 0}
+  Target: {fileID: 0}
 --- !u!50 &5306162894717399736
 Rigidbody2D:
   serializedVersion: 4
@@ -182,3 +166,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9115785526672412136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707423932814148771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58607bfb5fc8c466bb44a03d339292f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthPoint: 10
+  GoalZone: {fileID: 0}
+  MoveSpeed: 0.02

@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Alien;
+using Enums;
 using UnityEngine;
 
 public class Player : MonoBehaviour

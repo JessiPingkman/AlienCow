@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Alien
+namespace Common
 {
-    public class Move : MonoBehaviour
+    public class Movement : MonoBehaviour
     {
         public Transform Target;
     
@@ -20,11 +20,11 @@ namespace Alien
             _distance = Vector3.Distance(transform.position, Target.position);
         }
 
-        public void MoveForward(float speed)
+        public void Move(float speed)
         {
             float distCovered = (Time.time - _startTime) * speed;
-            float fractionOfDistance = distCovered / _distance;
-            transform.position = Vector2.Lerp(transform.position, Target.position, fractionOfDistance);
+            float step = distCovered / _distance;
+            transform.position = Vector2.Lerp(transform.position, Target.position, step);
         }
 
         public void ChangeTarget(Transform newTarget)

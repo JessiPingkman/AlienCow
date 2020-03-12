@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 
-public abstract class MortalEntity : MonoBehaviour
+namespace Alien
 {
-    public float HealthPoint = 10;
-
-    public void CheckDeath()
+    public abstract class MortalEntity : MonoBehaviour
     {
-        if (HealthPoint <= 0)
-        {
-            Die();
-        }
-    }
+        public float HealthPoint = 10;
 
-    protected abstract void Die();
+        public void CheckDeath()
+        {
+            if (HealthPoint <= 0)
+            {
+                Die();
+            }
+        }
+
+        protected abstract void Die();
+    }
 }
