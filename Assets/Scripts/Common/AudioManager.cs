@@ -4,14 +4,13 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     private static AudioSource _audio;
-    private static Dictionary<string, AudioClip> _sounds;
+    private static Dictionary<string, AudioClip> _sounds = new Dictionary<string, AudioClip>();
 
     private void Awake()
     {
-        _sounds = new Dictionary<string, AudioClip>();
-
         _audio = GetComponent<AudioSource>();
         var soundsList = Resources.LoadAll<AudioClip>("Sounds");
+        
         foreach(var sound in soundsList)
         {
             _sounds.Add(sound.name, sound);

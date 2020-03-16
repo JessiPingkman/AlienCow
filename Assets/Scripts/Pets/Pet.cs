@@ -6,53 +6,49 @@ namespace Pets
 {
     public class Pet : MonoBehaviour
     {
-        public float Speed = 1;
-        
-        [HideInInspector]
-        public bool IsFree= true;
-        [HideInInspector]
-        public bool IsNotInPetZone;
-    
-        public string[] Sounds;
-    
+        private bool _isFree = true;
         private Movement _movement;
-        private Vector3 _targetPosition;
+        private CountManager _countManager;
 
         private void Awake()
         {
-            IsFree= true;
             _movement = GetComponent<Movement>();
-            _targetPosition = _movement.Target.position;
+            _countManager = CountManager.Instance;
         }
 
         private void FixedUpdate()
         {
-            if (IsFree && IsNotInPetZone)
-            {
-                _movement.Move(Speed);
-
-                if (transform.position == _targetPosition)
-                {
-                    IsNotInPetZone = false;
-                }
-            }
+            ReturnToPetZone();
         }
-
+        
         public void BecomeFree()
         {
             transform.SetParent(null);
-            IsFree = true;
-            AudioManager.PlaySound(Sounds[Random.Range(0,Sounds.Length)]);
-            CountManager.Instance.Increment(CounterTag.Pets, 1);
+            _countManager.Increment(CounterTag.Pets, 1);
+            _isFree = true;
         }
     
-        public void BecomeHostage(Transform enemy)
+        public bool BecomeHostage(Transform enemy)
         {
+            if (_isFree == false)
+            {
+                return false;
+            }
+            
+            _isFree = false;
             transform.SetParent(enemy);
             transform.localPosition = Vector2.zero;
-            IsFree = false;
-            IsNotInPetZone = true;
-            CountManager.Instance.Decrement(CounterTag.Pets, 1);
+            _countManager.Decrement(CounterTag.Pets, 1);
+
+            return true;
+        }
+        
+        private void ReturnToPetZone()
+        {
+            if (_isFree && transform.position != _movement.GetTargetPosition()) 
+            { 
+                _movement.Move();
+            } 
         }
     }
 }

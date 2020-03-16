@@ -1,7 +1,4 @@
-﻿using Enums;
-using Pets;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 namespace Alien
 {
@@ -9,11 +6,11 @@ namespace Alien
     {
         private Transform[] _escapePoints;
     
-        private void Start()
+        private void Awake()
         {
             _escapePoints = new Transform[transform.childCount];
         
-            for (int i = 0; i < transform.childCount; i++)
+            for(var i = 0; i < _escapePoints.Length; i++)
             {
                 _escapePoints[i] = transform.GetChild(i);
             }
@@ -21,17 +18,17 @@ namespace Alien
 
         public Transform GetRandomEscapePoint()
         {
-            int pointsCount = _escapePoints.Length;
-            return _escapePoints[Random.Range(0, pointsCount)];
+            var randomPoint = _escapePoints[Random.Range(0, _escapePoints.Length)];
+            return randomPoint;   
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             var enemy = other.GetComponent<Enemy>();
         
-            if (enemy != null && enemy.HostageIsTaken)
+            if (enemy != null)
             {
-                Destroy(other.gameObject);
+                enemy.EscapeToShip();
             }
         }
     }

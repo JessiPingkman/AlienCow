@@ -4,10 +4,13 @@ namespace Common
 {
     public class Movement : MonoBehaviour
     {
-        public Transform Target;
+        [SerializeField]
+        private float _moveSpeed = 0.02f;
+        [SerializeField]
+        private Transform _target;
     
-        private float _startTime;
         private float _distance;
+        private float _startTime;
 
         private void OnEnable() 
         {
@@ -17,21 +20,26 @@ namespace Common
         private void Initialize()
         {
             _startTime = Time.time;
-            _distance = Vector3.Distance(transform.position, Target.position);
+            _distance = Vector3.Distance(transform.position, _target.position);
         }
 
-        public void Move(float speed)
+        public void Move()
         {
-            float distCovered = (Time.time - _startTime) * speed;
-            float step = distCovered / _distance;
-            transform.position = Vector2.Lerp(transform.position, Target.position, step);
+            var distCovered = (Time.time - _startTime) * _moveSpeed;
+            var step = distCovered / _distance;
+            transform.position = Vector2.Lerp(transform.position, _target.position, step);
         }
 
         public void ChangeTarget(Transform newTarget)
         {
-            Target = newTarget;
+            _target = newTarget;
             _startTime = Time.time;
-            _distance = Vector3.Distance(transform.position, Target.position);
+            _distance = Vector3.Distance(transform.position, _target.position);
+        }
+
+        public Vector3 GetTargetPosition()
+        {
+            return _target.position;
         }
     }
 }

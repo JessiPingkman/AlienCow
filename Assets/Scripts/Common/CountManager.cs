@@ -13,7 +13,7 @@ public class CountManager : MonoBehaviour
 
     private Dictionary<CounterTag, Counter> _countersDictionary;
 
-    private void Start()
+    private void Awake()
     {
         if(Instance == null)
         {
