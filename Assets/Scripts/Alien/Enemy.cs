@@ -17,7 +17,7 @@ namespace Alien
         private CountManager _countManager;
         private ObjectPoolManager _objectPoolManager;
         
-        private const string ROTATE = "Rotate";
+        private const string ANIMATION_TRIGGER_ROTATE = "Rotate";
 
         private void Awake()
         {
@@ -58,8 +58,8 @@ namespace Alien
             if (isTaken)
             {
                 _hostage = hostage;
-                _movement.ChangeTarget(EscapeZone.GetRandomEscapePoint());
-                _animator.SetTrigger(ROTATE);
+                _movement.SetTarget(EscapeZone.GetRandomEscapePoint());
+                _animator.SetTrigger(ANIMATION_TRIGGER_ROTATE);
             }            
         }
         
@@ -67,6 +67,7 @@ namespace Alien
         {
             if (_hostage == null)
             {
+                Debug.Log("Error: hostage is null");
                 return;
             }
             

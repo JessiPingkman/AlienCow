@@ -30,7 +30,7 @@ namespace Common
             transform.position = Vector2.Lerp(transform.position, _target.position, step);
         }
 
-        public void ChangeTarget(Transform newTarget)
+        public void SetTarget(Transform newTarget)
         {
             _target = newTarget;
             _startTime = Time.time;
