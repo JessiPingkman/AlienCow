@@ -51,9 +51,4 @@ public class Player : MonoBehaviour
         GameObject explosionFx = ObjectPoolManager.Instance.GetFromPool(PoolTag.ExplosionFx);
         explosionFx.transform.position = spawnPosition;
     }
-
-    private void Die ()
-    {
-        Destroy (gameObject);
-    }
 }
